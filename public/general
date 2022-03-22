@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AccountProperties>
+	<UserName>+16674021037</UserName>
+	<!-- <Password></Password> -->
+	<TimeZoneId null="true" />
+	<CallAhead>Never</CallAhead>
+	<ClientLog>Always</ClientLog>
+	<Lines>
+		<LineProperties>
+			<Index>0</Index>
+			<PhoneNumber>16674021037</PhoneNumber>
+			<StripRowsFromImage>34</StripRowsFromImage>
+			<Notifications>DeliveryAndNonDelivery</Notifications>
+		</LineProperties>
+	</Lines>
+</AccountProperties>
