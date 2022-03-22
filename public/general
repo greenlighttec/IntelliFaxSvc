@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <AccountProperties>
-	<UserName>+16674021037</UserName>
-	<!-- <Password></Password> -->
+	<UserName>username</UserName>
+	<!-- <Password>manually configured, or uncomment this</Password> -->
 	<TimeZoneId null="true" />
 	<CallAhead>Never</CallAhead>
 	<ClientLog>Always</ClientLog>
