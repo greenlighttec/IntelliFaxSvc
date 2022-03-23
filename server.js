@@ -11,7 +11,9 @@ const basicAuth = require('express-basic-auth');
 // load required internal modules
 const tools = require('./lib/tools.js');
 const faxstatus = require('./lib/ReportDeliveryStatus.js');
-const AuthUsers =  require('./unused/secrets.json');
+//const AuthUsers =  require('./secrets/creds.json');
+//const DeviceUserMapping = require('./secrets/devicemapping.json');
+const authenticateUsers = require('./lib/AuthenticateAccount.js');
 const host = '0.0.0.0';
 const port = 8340;
 
@@ -35,14 +37,12 @@ app.get('/AccountProvisioningDetail/:deviceMac', (req,res) => {
 
 });
 
-app.get('/AuthenticateAccount', basicAuth({users: AuthUsers, challenge: true,ream: 'faxapp.hostedpbx.intellicloud.tech' }) ,(req,res) => {
 
-                console.log('Heres the URL being hit in Account Authentication');
-                console.log(req.path);
-		var answer = tools.multiply(a,b);
-                var httpresponse = `<h1>AuthenticateAccount</h1><p>Hooray you made it, your answer is ${answer}</p>`;
-		console.log(AuthUsers);
-		res.send(httpresponse)
+app.get('/AuthenticateAccount', authenticateUsers, (req, res) => {
+
+	console.log(res.locals.deviceMac)
+	res.contentType('application/xml');
+	res.sendFile(path.join(__dirname, '/public/' + res.locals.deviceMac + '.xml'));
 
 });
 
