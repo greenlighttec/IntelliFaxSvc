@@ -12,3 +12,7 @@ You'll need to create the secrets folder with the devicemapping.json and creds.j
 
 ### devicemapping.json example
 {"username": "devicemacaddress"}
+
+### Required external applications
+* poppler-utils
+* libtiff-utils
