@@ -8,7 +8,8 @@ You'll need to create an XML file that consists of the configuration you want th
 You'll need to create the secrets folder with a database.json file with. Alternatively replace this with database queries and move to a database backend
 
 ### database.json example
-```{
+```
+{
         "username": {
                 "password": "password",
                 "devicemap": "macaddr1",
@@ -27,7 +28,8 @@ You'll need to create the secrets folder with a database.json file with. Alterna
 
         }
 
-}```
+}
+```
 
 
 ### Required external applications
