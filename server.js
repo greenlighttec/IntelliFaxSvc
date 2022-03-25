@@ -53,7 +53,12 @@ app.get('/ReportDeliveryStatus', (req,res) => {
                 res.send(`<h1>${paths[0]}</h1><p>Hooray you made it, your answer is ${answer}</p>`);
 });
 
+app.get('*', (req,res) => {
+	var loggedDetails = 'WARNING! Invalid Page HTTP Request to ' + req.path + ' | Parameters sent are: ' + JSON.stringify(req.query)
+	console.log(loggedDetails);
+	res.sendStatus(404);
 
+});
 
 
 app.listen(port, host, () => {
