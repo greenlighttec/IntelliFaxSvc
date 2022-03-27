@@ -3,8 +3,11 @@
     "body-parser": "^1.19.2",
     "express": "^4.17.3",
     "express-basic-auth": "^1.2.1",
+    "multer": "^1.4.4",
     "pdftoimage": "^1.0.0",
+    "request": "^2.88.2",
     "telnyx": "^1.23.0",
+    "tiff-multipage": "^0.2.0",
     "tiff2pdf": "^1.0.2"
   }
 }

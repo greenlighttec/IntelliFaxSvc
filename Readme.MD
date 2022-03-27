@@ -35,3 +35,6 @@ You'll need to create the secrets folder with a database.json file with. Alterna
 ### Required external applications
 * poppler-utils
 * libtiff-utils
+* libTIFF - See https://library.knightlab.com/technical-learning-resources/ubuntu-how-tos/adding-libtiff-to-ubuntu
+** pkgconf
+** gyp

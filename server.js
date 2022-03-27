@@ -4,12 +4,15 @@ const app  = express();
 const path = require('path');
 const telnyx = require('telnyx');
 const body = require('body-parser');
-const basicAuth = require('express-basic-auth');
+const multer = require('multer');
+const upload = multer({dest: './uploaded_files'});
 
 // load required internal modules
 const tools = require('./lib/tools.js');
 const faxstatus = require('./lib/ReportDeliveryStatus.js');
 const authenticateUsers = require('./lib/AuthenticateAccount.js');
+const receiveFax = require('./lib/ReceiveFax.js');
+const sendFax = require('./lib/SendFax.js');
 const host = '0.0.0.0';
 const port = 8340;
 
@@ -39,14 +42,35 @@ app.get('/AccountLoginDetail', authenticateUsers, (req, res) => {
 
 });
 
-app.post('/ReceiveFax', (req, res) => {
-
-		//Incoming Function from Telnyx and  send fax to ATA to be printed by the fax machine.
-		//Send API calls to https://rest-api.faxback.com/nsps/nsps.aspx?target=atamime
-		console.log(req)
+app.get('/AuthorizeSendFax/:faxuser/:callednumber', (req,res) => {
+	const faxUser = req.params.faxuser
+	const calledNumber = req.params.callednumber
+	console.log('Username ' + faxUser + ' tried calling phone number ' + calledNumber + '.');
+	res.sendStatus(200);
 
 });
 
+app.get('/ReceiveFax', (req, res) => {
+
+		//Incoming Function from Telnyx and  send fax to ATA to be printed by the fax machine.
+		//Send API calls to https://rest-api.faxback.com/nsps/nsps.aspx?target=atamime
+		//console.log(req.body)
+		res.sendStatus(200);
+
+});
+
+app.use(express.json({limit: '2gb',parameterLimit: 1000000}));
+app.use(express.urlencoded({ extended: true,limit: '2gb',parameterLimit: 1000000 }));
+
+app.post('/ReceiveFax',upload.array('FaxImage'),receiveFax, (req, res) => {
+	//console.log(req.files, req.body);
+	res.send('<p>Received Form Data</p>');
+
+});
+
+app.post('/SendFax/:callednumber', authenticateUsers, upload.array('FaxImage'),sendFax, (req, res) => {
+	res.sendStatus(200)
+});
 
 app.get('/ReportDeliveryStatus', (req,res) => {
 		var answer = tools.multiply(a,b);
