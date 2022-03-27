@@ -40,5 +40,5 @@ You'll also need to create an 'uploaded_files' folder and inside that create two
 * poppler-utils
 * libtiff-utils
 * libTIFF - See https://library.knightlab.com/technical-learning-resources/ubuntu-how-tos/adding-libtiff-to-ubuntu
- * pkgconf
- * gyp
+	* pkgconf
+	* gyp
