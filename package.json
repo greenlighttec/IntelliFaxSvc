@@ -7,7 +7,6 @@
     "pdftoimage": "^1.0.0",
     "request": "^2.88.2",
     "telnyx": "^1.23.0",
-    "tiff-multipage": "^0.2.0",
-    "tiff2pdf": "^1.0.2"
+    "tiff-multipage": "^0.2.0"
   }
 }
