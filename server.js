@@ -1,8 +1,6 @@
 // load required external modules
 const express =  require('express');
 const app  = express();
-const path = require('path');
-const telnyx = require('telnyx');
 const body = require('body-parser');
 const multer = require('multer');
 const upload = multer({dest: './uploaded_files'});
@@ -13,6 +11,7 @@ const faxstatus = require('./lib/ReportDeliveryStatus.js');
 const authenticateUsers = require('./lib/AuthenticateAccount.js');
 const receiveFax = require('./lib/ReceiveFax.js');
 const sendFax = require('./lib/SendFax.js');
+const faxStatus = require('./lib/ReportDeliveryStatus.js');
 const host = '0.0.0.0';
 const port = 8340;
 
@@ -29,7 +28,7 @@ app.get('/AccountProvisioningDetail/:deviceMac', (req,res) => {
 	const deviceMac = req.params.deviceMac;
 	console.log('Provisioning request for MAC ' + deviceMac)
 	res.contentType('application/xml');
-	res.sendFile(path.join(__dirname , '/public/' + deviceMac + '.xml' ));
+	res.sendFile(tools.basePath + '/public/' + deviceMac + '.xml');
 
 });
 
@@ -38,7 +37,7 @@ app.get('/AccountLoginDetail', authenticateUsers, (req, res) => {
 
 	console.log(res.locals.deviceMac)
 	res.contentType('application/xml');
-	res.sendFile(path.join(__dirname, '/public/' + res.locals.deviceMac + '.xml'));
+	res.sendFile(tools.basePath + '/public/' + res.locals.deviceMac + '.xml');
 
 });
 
@@ -70,6 +69,11 @@ app.post('/ReceiveFax',upload.array('FaxImage'),receiveFax, (req, res) => {
 
 app.post('/SendFax/:callednumber', authenticateUsers, upload.array('FaxImage'),sendFax, (req, res) => {
 	res.sendStatus(200)
+});
+
+app.post('/DeliverImageStatus/:id', upload.none(),faxStatus.ReceiveAtaFaxReport, (req, res) => {
+	
+	res.sendStatus(200);
 });
 
 app.get('/ReportDeliveryStatus', (req,res) => {
