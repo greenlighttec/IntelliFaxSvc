@@ -1,17 +1,21 @@
-// load required external modules
+// load required external libraries
 const express =  require('express');
 const app  = express();
 const body = require('body-parser');
-const multer = require('multer');
+
+// load shared libraries
+const tools = require('./lib/tools.js');
+const multer = tools.multer;
 const upload = multer({dest: './uploaded_files'});
 
-// load required internal modules
-const tools = require('./lib/tools.js');
+// load required internal libraries
 const faxstatus = require('./lib/ReportDeliveryStatus.js');
 const authenticateUsers = require('./lib/AuthenticateAccount.js');
 const receiveFax = require('./lib/ReceiveFax.js');
 const sendFax = require('./lib/SendFax.js');
 const faxStatus = require('./lib/ReportDeliveryStatus.js');
+
+
 const host = '0.0.0.0';
 const port = 8340;
 
@@ -49,36 +53,30 @@ app.get('/AuthorizeSendFax/:faxuser/:callednumber', (req,res) => {
 
 });
 
-app.get('/ReceiveFax', (req, res) => {
-
-		//Incoming Function from Telnyx and  send fax to ATA to be printed by the fax machine.
-		//Send API calls to https://rest-api.faxback.com/nsps/nsps.aspx?target=atamime
-		//console.log(req.body)
-		res.sendStatus(200);
-
+app.get('/uploaded_files/pdfs/*', (req, res) => {
+	var requestFile = tools.basePath + req.path
+	res.sendFile(requestFile, function (err) {
+	if (err) {console.log(err)}
+	else {tools.fs.unlinkSync(requestFile)}
+	});
 });
 
 app.use(express.json({limit: '2gb',parameterLimit: 1000000}));
 app.use(express.urlencoded({ extended: true,limit: '2gb',parameterLimit: 1000000 }));
 
-app.post('/ReceiveFax',upload.array('FaxImage'),receiveFax, (req, res) => {
+app.post('/ReceiveFax', upload.array('FaxImage'), receiveFax, (req, res) => {
 	//console.log(req.files, req.body);
 	res.send('<p>Received Form Data</p>');
 
 });
 
-app.post('/SendFax/:callednumber', authenticateUsers, upload.array('FaxImage'),sendFax, (req, res) => {
+app.post('/SendFax/:callednumber', authenticateUsers, sendFax, (req, res) => {
 	res.sendStatus(200)
 });
 
-app.post('/DeliverImageStatus/:id', upload.none(),faxStatus.ReceiveAtaFaxReport, (req, res) => {
+app.post('/DeliverImageStatus/:id', upload.none(), faxStatus.ReceiveAtaFaxReport, (req, res) => {
 	
 	res.sendStatus(200);
-});
-
-app.get('/ReportDeliveryStatus', (req,res) => {
-		var answer = tools.multiply(a,b);
-                res.send(`<h1>${paths[0]}</h1><p>Hooray you made it, your answer is ${answer}</p>`);
 });
 
 app.get('*', (req,res) => {
