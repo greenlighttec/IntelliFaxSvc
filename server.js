@@ -9,11 +9,11 @@ const multer = tools.multer;
 const upload = multer({dest: './uploaded_files'});
 
 // load required internal libraries
-const faxstatus = require('./lib/ReportDeliveryStatus.js');
-const authenticateUsers = require('./lib/AuthenticateAccount.js');
-const receiveFax = require('./lib/ReceiveFax.js');
-const sendFax = require('./lib/SendFax.js');
-const faxStatus = require('./lib/ReportDeliveryStatus.js');
+const faxstatus = require('./lib/faxing/ReportDeliveryStatus.js');
+const authenticateUsers = require('./lib/faxing/AuthenticateAccount.js');
+const receiveFax = require('./lib/faxing/ReceiveFax.js');
+const sendFax = require('./lib/faxing/SendFax.js');
+const faxStatus = require('./lib/faxing/ReportDeliveryStatus.js');
 
 
 const host = '0.0.0.0';
