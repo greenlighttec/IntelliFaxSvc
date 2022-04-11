@@ -14,8 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Devices.init({
-    deviceid: DataTypes.NUMBER,
-    clientid: DataTypes.NUMBER,
+    id: {type: DataTypes.INTEGER,
+	 allowNull: false,
+	 primaryKey: true,
+	 autoIncrement: true},
+    clientid: DataTypes.INTEGER,
     name: DataTypes.STRING,
     macaddr: DataTypes.STRING,
     line1: DataTypes.STRING,

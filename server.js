@@ -79,10 +79,23 @@ app.post('/DeliverImageStatus/:id', upload.none(), faxStatus.ReceiveAtaFaxReport
 	res.sendStatus(200);
 });
 
+app.get('/admin/*', (req, res) => {
+	var requestFile = tools.basePath + 'public' + req.path
+	console.log(requestFile)
+	res.sendFile(requestFile,  (err) => {
+		if (err) {console.log(err);
+		if (err.statusCode == '404') {
+			res.status(404).sendFile(tools.basePath + '404/index.html')
+		}
+		}
+	});
+
+});
+
 app.get('*', (req,res) => {
 	var loggedDetails = 'WARNING! Invalid Page HTTP Request to ' + req.path + ' | Parameters sent are: ' + JSON.stringify(req.query)
 	console.log(loggedDetails);
-	res.sendStatus(404);
+	res.status(404).sendFile(tools.basePath + '404/index.html');
 
 });
 
