@@ -8,13 +8,16 @@ const tools = require('./lib/tools.js');
 const multer = tools.multer;
 const upload = multer({dest: './uploaded_files'});
 
-// load required internal libraries
+// load required faxing libraries
 const faxstatus = require('./lib/faxing/ReportDeliveryStatus.js');
-const authenticateUsers = require('./lib/faxing/AuthenticateAccount.js');
+const authenticateAccounts = require('./lib/faxing/AuthenticateAccount.js');
 const receiveFax = require('./lib/faxing/ReceiveFax.js');
 const sendFax = require('./lib/faxing/SendFax.js');
 const faxStatus = require('./lib/faxing/ReportDeliveryStatus.js');
 
+// load required admin libraries
+const authenticateUsers = require('./lib/admin/AuthenticateUsers.js');
+const clients = require('./lib/admin/ClientAccounts.js');
 
 const host = '0.0.0.0';
 const port = 8340;
@@ -37,7 +40,7 @@ app.get('/AccountProvisioningDetail/:deviceMac', (req,res) => {
 });
 
 
-app.get('/AccountLoginDetail', authenticateUsers, (req, res) => {
+app.get('/AccountLoginDetail', authenticateAccounts, (req, res) => {
 
 	console.log(res.locals.deviceMac)
 	res.contentType('application/xml');
@@ -57,7 +60,6 @@ app.get('/uploaded_files/pdfs/*', (req, res) => {
 	var requestFile = tools.basePath + req.path
 	res.sendFile(requestFile, function (err) {
 	if (err) {console.log(err)}
-	else {tools.fs.unlinkSync(requestFile)}
 	});
 });
 
@@ -70,7 +72,7 @@ app.post('/ReceiveFax', upload.array('FaxImage'), receiveFax, (req, res) => {
 
 });
 
-app.post('/SendFax/:callednumber', authenticateUsers, sendFax, (req, res) => {
+app.post('/SendFax/:callednumber', authenticateAccounts, sendFax, (req, res) => {
 	res.sendStatus(200)
 });
 
@@ -79,7 +81,22 @@ app.post('/DeliverImageStatus/:id', upload.none(), faxStatus.ReceiveAtaFaxReport
 	res.sendStatus(200);
 });
 
-app.get('/admin/*', (req, res) => {
+app.get('/admin/api/*', authenticateUsers, (req, res) => {
+
+switch (req.path) {
+
+	case "/admin/api/getallaccounts":
+	clients.findAllByStatement({}, (clients) => { res.status(200).send(clients) });
+	break;
+	default:
+	res.status(404).sendFile(tools.basePath + '404/index.html');
+	break;
+
+}
+
+});
+
+app.get('/admin/*', authenticateUsers, (req, res) => {
 	var requestFile = tools.basePath + 'public' + req.path
 	console.log(requestFile)
 	res.sendFile(requestFile,  (err) => {
@@ -89,6 +106,13 @@ app.get('/admin/*', (req, res) => {
 		}
 		}
 	});
+
+});
+
+app.post('/admin/api/*', authenticateUsers, (req, res) => {
+	console.log(req.body)
+  backURL=req.header('Referer') || '/admin/admin.html';
+  res.redirect(backURL);
 
 });
 
