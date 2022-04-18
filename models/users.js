@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+     Users.belongsTo(models.Clients, {foriegnKey: 'clientid', onDelete: 'CASCADE'})
     }
   }
   Users.init({
@@ -18,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     firstname: DataTypes.STRING,
     lastname: DataTypes.STRING,
     username: DataTypes.STRING,
-    password: DataTypes.STRING
+    password: DataTypes.STRING,
+    session: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Users',

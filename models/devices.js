@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+     Devices.belongsTo(models.Clients, {foriegnKey: 'clientid', onDelete: 'CASCADE'})
     }
   }
   Devices.init({

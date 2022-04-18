@@ -1,29 +1,38 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('FaxLogs', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      telnyxfaxid: {
+        type: Sequelize.STRING
+      },
+      atafaxid: {
+        type: Sequelize.STRING
+      },
       clientid: {
         type: Sequelize.INTEGER
       },
-      firstname: {
+      deviceid: {
+        type: Sequelize.INTEGER
+      },
+      numberfrom: {
         type: Sequelize.STRING
       },
-      lastname: {
+      numberto: {
+	type: Sequelize.STRING
+      },
+      direction: {
         type: Sequelize.STRING
       },
-      username: {
-        type: Sequelize.STRING
+      attempts: {
+        type: Sequelize.INTEGER
       },
-      password: {
-        type: Sequelize.STRING
-      },
-      session: {
+      result: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -37,6 +46,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('FaxLogs');
   }
 };

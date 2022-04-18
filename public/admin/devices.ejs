@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<%- include ("./templateheader.ejs") %>
+
+
+  <!--Main layout-->
+  <main style="margin-top: 58px">
+    <div class="container pt-4">
+
+      <!--Section: Sales Performance KPIs-->
+      <section class="mb-4">
+        <div class="card">
+          <div class="card-header text-center py-3">
+            <h5 class="mb-0 text-center">
+              <strong>Configured Devices</strong>
+            </h5>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+		<div class="devicesTableDiv"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!--Section: Sales Performance KPIs-->
+        <!-- <div class="card">
+          <div class="card-header text-center py-3">
+            <h5 class="mb-0 text-center">
+              <strong>Create/Modify Account</strong>
+            </h5>
+          </div>
+          <div class="card-body">
+          <div class="d-flex justify-content-center">
+          <form action="/admin/api/createDevice" method="POST" id="deviceCreation" class="row row-cols-lg-auto g-3 align-items-center onsubmit="target_popup(this)"">
+	  <div class="col-12">
+	    <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
+	    <div class="input-group">
+	      <div class="input-group-text" id="accountIdLabel">@</div>
+	      <input type="hidden" id="accountId" name="accountId">
+	      <input type="text" class="form-control" id="accountName" name="accountName" placeholder="Account Name" />
+	    </div>
+	  </div>
+
+	  <div class="col-12">
+	    <button type="submit" formaction="/admin/api/deleteAccount" class="btn btn-danger">Delete Account</button>
+	  </div>
+
+	  <div class="col-12">
+	   <button type="button" onClick="resetForm()" class="btn btn-warning">Reset Form</button>
+	  </div>
+
+	  <div class="col-12">
+	    <button type="submit" class="btn btn-primary" id="customerAccountButton">Create Account</button>
+	  </div>
+
+
+	  </form> -->
+          </div>
+          </div>
+        </div>
+      </section>
+
+
+  </main>
+  <!--Main layout-->
+  <!-- MDB -->
+  <script type="text/javascript" src="/admin/resources/js/mdb.min.js"></script>
+  <!-- Custom scripts
+  <script type="text/javascript" src="/admin/resources/js/admin.js"></script> -->
+  <script type="text/javascript" src="/admin/resources/js/devicetable.js"></script>
+
+</body>
+
+</html>
