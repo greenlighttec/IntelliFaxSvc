@@ -58,7 +58,7 @@ var postAPICall = function (req, res, next) {
 
         switch (req.path) {
 
-                case "/admin/api/createAccount":
+                case "/admin/api/createcustomers":
 		 var accountId = req.body.accountId
 		 var accountName = req.body.accountName
                  if (accountId && accountName) {clients.updateRecordByWhereStatement({id: accountId},{clientname: accountName},(result) => {

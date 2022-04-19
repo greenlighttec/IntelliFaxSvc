@@ -140,16 +140,43 @@ app.get('/admin/resources/*', authenticateUsers, (req, res) => {
 			res.status(404).redirect('/404')
 		}
 		}
-	}); 
+	});
 
 });
 
 app.get('/admin', authenticateUsers, (req, res) => {
-	res.render('admin/index')
+	res.render('admin/index', {path: req.path.split('/')[1]})
 });
 
 app.get('/admin/*', authenticateUsers, (req, res) => {
-	res.render(req.path.substr(1), undefined, (err, html) => {
+ var requestedPage = req.path.split('/')[2]
+ switch (requestedPage) {
+  case "faxlog":
+    var templateObject = {cardHeaderName: "Fax Log", tableClassName: "DivFaxLog", formCreateApiEndpoint: "Faxlog", formId: "formUpdateFaxlog", frontEndScriptName: "faxlogtable.js", path: requestedPage};
+
+  break;
+  case "customers":
+    var templateObject = {cardHeaderName: "Customer Accounts", tableClassName: "DivCustomer", formCreateApiEndpoint: "Account", formId: "formUpdateAccount", frontEndScriptName: "customertable.js", path: requestedPage};
+
+  break;
+  case "devices":
+    var templateObject = {cardHeaderName: "Device", tableClassName: "DivDevices", formCreateApiEndpoint: "Device", formId: "formUpdateDevice", frontEndScriptName: "devicetable.js", path: requestedPage};
+
+  break;
+  case "phonenumbers":
+    var templateObject = {cardHeaderName: "Fax Number", tableClassName: "DivFaxNumber", formCreateApiEndpoint: "Phonenumber", formId: "formUpdatePhonenumber", frontEndScriptName: "phonenumbertable.js", path: requestedPage};
+
+  break;
+  case "users":
+    var templateObject = {cardHeaderName: "Users", tableClassName: "DivUsers", formCreateApiEndpoint: "Users", formId: "formUpdateUser", frontEndScriptName: "userstable.js", path: requestedPage};
+
+  break;
+  default:
+    var templateObject = undefined;
+
+ }
+
+	res.render('admin/template/body', templateObject, (err, html) => {
 		if (err) {console.log(err);
                         res.status(404).redirect('/404')
 		}

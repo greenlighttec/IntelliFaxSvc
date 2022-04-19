@@ -1,6 +1,4 @@
-const accountsTableDiv = document.querySelector(".DivCustomerTable");
-const accountsFormElement = document.getElementById('formUpdateAccountCreation')
-
+const accountsTableDiv = document.querySelector(".customerAccounts");
 let tableHeaders = ["CustomerID", "Customer Name", "Created", "Last Updated"]
 
 const createaccountsTable = () => {
@@ -56,85 +54,6 @@ const appendAccount = (customerId, customerName, createdDate, modifiedDate) => {
 
 }
 
-function appendForm() {
-
-// create form elements
- let formPartA = document.createElement('div')
- let formPartB = document.createElement('div')
- let formPartC = document.createElement('div')
- let formPartD = document.createElement('div')
-
- let divCol = document.createElement('div')
- let formButton = document.createElement('button');
-
-// setup part A
- let formInputLabel = document.createElement('div')
- formInputLabel.id = 'accountIdLabel'
- formInputLabel.classList = 'input-group-text'
- formInputLabel.innerText = '@'
-
- let formHiddenInput = document.createElement('input')
- formHiddenInput.type = 'hidden'
- formHiddenInput.id = 'accountId'
- formHiddenInput.name = 'accountId'
-
- let formTextInput = document.createElement('input')
- formTextInput.classList = 'form-control'
- formTextInput.type = 'text'
- formTextInput.id = 'accountName'
- formTextInput.name = 'accountName'
- formTextInput.placeholder = 'Account Name'
- formTextInput.setAttribute('onclick','activateForm()')
-
- let divInputGroup = document.createElement('div')
- divInputGroup.classList = 'input-group'
- divInputGroup.append(formInputLabel, formHiddenInput, formTextInput)
-
- formPartA.classList = 'col-12'
- formPartA.append(divInputGroup)
-
-// setup part B
-
-  let formDeleteAccountButton = document.createElement('button');
-  formDeleteAccountButton.type = 'submit'
-  formDeleteAccountButton.formAction = '/admin/api/deleteAccount'
-  formDeleteAccountButton.id = 'deleteAccount'
-  formDeleteAccountButton.classList = 'btn btn-danger'
-  formDeleteAccountButton.disabled = true;
-  formDeleteAccountButton.innerText = 'Delete Account'
-
-  formPartB.classList = 'col-12'
-  formPartB.append(formDeleteAccountButton)
-
-// setup part C
-
-  let formResetButton = document.createElement('button');
-  formResetButton.type = 'button'
-  formResetButton.setAttribute('onclick','resetFormData()')
-  formResetButton.id = 'resetForm'
-  formResetButton.classList = 'btn btn-warning'
-  formResetButton.disabled = true;
-  formResetButton.innerText = 'Reset Form'
-
-  formPartC.classList = 'col-12'
-  formPartC.append(formResetButton)
-
-// setup part D
-
-  let formUpdateAccountButton = document.createElement('button');
-  formUpdateAccountButton.type = 'submit'
-  formUpdateAccountButton.id = 'customerAccountButton'
-  formUpdateAccountButton.classList = 'btn btn-primary'
-  formUpdateAccountButton.innerText = 'Create Account'
-
-  formPartD.classList = 'col-12'
-  formPartD.append(formUpdateAccountButton)
-
-
-// append completed Form
- accountsFormElement.append(formPartA, formPartB, formPartC, formPartD)
-}
-
 
 const getAccounts = () => {
 	fetch('/admin/api/getallaccounts') // Fetch for all scores. The response is an array of objects that is sorted in decreasing order
@@ -150,49 +69,17 @@ const getAccounts = () => {
 }
 
 getAccounts()
-appendForm()
+
+//$(document).ready(function() {
 
 document.body.addEventListener("click", function (event) {
 	if (event.path[2].className == 'accountsTable-Body') {
 		var clientId = event.path[1].getElementsByTagName('td')[0].innerHTML;
 		var clientName = event.path[1].getElementsByTagName('td')[1].innerHTML;
 		document.getElementById('accountId').value = clientId
-		document.getElementById('accountIdLabel').innerText = clientId
 		document.getElementById('accountName').className = "form-control active"
 		document.getElementById('accountName').value = clientName
-		document.getElementById('customerAccountButton').innerText = "Update Account"
-		document.getElementById('resetForm').disabled = false;
-		document.getElementById('deleteAccount').disabled = false;
 	 }
-
-});
-
-function activateForm() {
-
-	document.getElementById('resetForm').disabled = false;
-
-}
-
-function resetFormData() {
-   document.getElementById('accountId').value = null
-   document.getElementById('accountIdLabel').innerText = "@"
-   document.getElementById('accountName').className = "form-control"
-   document.getElementById('accountName').value = null
-   document.getElementById('customerAccountButton').innerText = "Create Account"
-   document.getElementById('resetForm').disabled = true;
-   document.getElementById('deleteAccount').disabled = true;
-
-
-}
-
-function target_popup(form) {
-    window.open('', 'formpopup', 'width=400,height=400,resizeable,scrollbars');
-    form.target = 'formpopup';
-}
-
-/*$(document).ready(function() {
-
-	$('#myTable').DataTable();
-'
-})*/
+})
+//})
 

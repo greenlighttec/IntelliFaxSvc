@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<%- include ("./header.ejs",{active: path}) %>
+
+
+  <!--Main layout-->
+  <main style="margin-top: 58px">
+    <div class="container pt-4">
+
+      <section class="mb-4">
+        <div class="card">
+          <div class="card-header text-center py-3">
+            <h5 class="mb-0 text-center">
+              <strong><%= cardHeaderName %> View</strong>
+            </h5>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+		<div class="<%= tableClassName %>Table"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+        <div class="card">
+          <div class="card-header text-center py-3">
+            <h5 class="mb-0 text-center">
+              <strong>Create/Modify <%= cardHeaderName %></strong>
+            </h5>
+          </div>
+          <div class="card-body">
+          <div class="d-flex justify-content-center">
+          <form action="/admin/api/create<%= path %>" method="POST" id="<%= formId %>Creation" class="row row-cols-lg-auto g-3 align-items-center onsubmit="target_popup(this)"">
+	  <!-- Insert form here -->
+
+	  </form>
+          </div>
+          </div>
+        </div>
+      </section>
+
+
+  </main>
+  <!--Main layout-->
+  <!-- MDB -->
+  <script type="text/javascript" src="/admin/resources/js/mdb.min.js"></script>
+  <!-- Custom scripts
+  <script type="text/javascript" src="/admin/resources/js/admin.js"></script> -->
+  <script type="text/javascript" src="/admin/resources/js/customertable.js"></script>
+
+</body>
+
+</html>

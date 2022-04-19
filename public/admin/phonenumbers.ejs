@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include ("./templateheader.ejs") %>
+<%- include ("./template/header.ejs") %>
 
   <!--Main layout-->
   <main style="margin-top: 58px">
@@ -12,7 +12,7 @@
         <div class="card">
           <div class="card-header text-center py-3">
             <h5 class="mb-0 text-center">
-              <strong>Customer Accounts</strong>
+              <strong>Phone Numbers</strong>
             </h5>
           </div>
           <div class="card-body">
@@ -26,16 +26,16 @@
         <div class="card">
           <div class="card-header text-center py-3">
             <h5 class="mb-0 text-center">
-              <strong>Create/Modify Account</strong>
+              <strong>Create/Modify Phone Number</strong>
             </h5>
           </div>
           <div class="card-body">
             <div class="d-flex justify-content-center">
-                <form action="/admin/api/createAccount" method="POST">
+                <form action="/admin/api/createPhoneNumber" method="POST">
 		<div class="form-outline mb-4">
-            		<input type="hidden" id="accountId" name="accountId">
-			<input type="text" id="accountName" name="accountName" class="form-control" autocomplete="off">
-            		<label class="form-label" for="accountName" style="margin-left: 0px;">Account Name</label>
+            		<input type="hidden" id="phoneNumberId" name="phoneNumberId">
+			<input type="text" id="phoneNumber" name="phoneNumber" class="form-control" autocomplete="off">
+            		<label class="form-label" for="phoneNumber" style="margin-left: 0px;">Phone Number</label>
           		<div class="form-notch">
 				<div class="form-notch-leading" style="width: 9px;"></div>
 				<div class="form-notch-middle" style="width: 42.4px;"></div>
@@ -56,7 +56,7 @@
   <script type="text/javascript" src="js/mdb.min.js"></script>
   <!-- Custom scripts
   <script type="text/javascript" src="js/admin.js"></script> -->
-  <script type="text/javascript" src="scripts/customertable.js"></script>
+  <script type="text/javascript" src="scripts/phonenumbertable.js"></script>
 
 </body>
 

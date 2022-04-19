@@ -2,7 +2,7 @@
 <html lang="en">
 
 
-<%- include ("./templateheader.ejs") %>
+<%- include ("./template/header.ejs") %>
 
 
   <!--Main layout-->
@@ -44,11 +44,11 @@
 	  </div>
 
 	  <div class="col-12">
-	    <button type="submit" formaction="/admin/api/deleteAccount" class="btn btn-danger">Delete Account</button>
+	    <button type="submit" id="deleteAccount" formaction="/admin/api/deleteAccount" class="btn btn-danger" disabled>Delete Account</button>
 	  </div>
 
 	  <div class="col-12">
-	   <button type="button" onClick="resetForm()" class="btn btn-warning">Reset Form</button>
+	   <button type="button" id="resetForm" onClick="resetForm()" class="btn btn-warning" disabled>Clear Form</button>
 	  </div>
 
 	  <div class="col-12">

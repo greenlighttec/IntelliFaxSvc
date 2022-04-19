@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
-  <title>IntelliFax Servie Admin UI</title>
+  <title>IntelliFax Service Admin UI</title>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
   <!-- Google Fonts Roboto -->
@@ -25,20 +25,20 @@
     <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
       <div class="position-sticky">
         <div class="list-group list-group-flush mx-3 mt-4">
-          <a id="main" href="/admin/index" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+          <a id="main" href="/admin" class="list-group-item list-group-item-action py-2 ripple <% if (path=='admin') {%>active<%}%> " aria-current="true">
             <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Main dashboard</span>
           </a>
-          <a id="faxlog" href="/admin/faxlog" class="list-group-item list-group-item-action py-2 ripple">
+          <a id="faxlog" href="/admin/faxlog" class="list-group-item list-group-item-action py-2 ripple <% if (path=='faxlog') {%>active<%}%> ">
             <i class="fas fa-chart-area fa-fw me-3"></i><span>Fax Log</span>
           </a>
-          <a id="customers" href="/admin/customers" class="list-group-item list-group-item-action py-2 ripple"><i
+          <a id="customers" href="/admin/customers" class="list-group-item list-group-item-action py-2 ripple <% if (path=='customers') {%>active<%}%> "><i
               class="fas fa-lock fa-fw me-3"></i><span>Customers</span></a>
-          <a id="devices" href="/admin/devices" class="list-group-item list-group-item-action py-2 ripple"><i
+          <a id="devices" href="/admin/devices" class="list-group-item list-group-item-action py-2 ripple <% if (path=='devices') {%>active<%}%> "><i
               class="fas fa-chart-line fa-fw me-3"></i><span>Devices</span></a>
-          <a id="faxnumbers" href="/admin/phonenumbers" class="list-group-item list-group-item-action py-2 ripple">
+          <a id="faxnumbers" href="/admin/phonenumbers" class="list-group-item list-group-item-action py-2 ripple <% if (path=='faxnumbers') {%>active<%}%> ">
             <i class="fas fa-chart-pie fa-fw me-3"></i><span>Fax Numbers</span>
           </a>
-          <a id="users" href="/admin/Users" class="list-group-item list-group-item-action py-2 ripple"><i
+          <a id="users" href="/admin/users" class="list-group-item list-group-item-action py-2 ripple <% if (path=='users') {%>active<%}%> "><i
               class="fas fa-chart-bar fa-fw me-3"></i><span>Admin Users</span></a>
         </div>
       </div>
