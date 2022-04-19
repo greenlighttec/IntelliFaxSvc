@@ -6,9 +6,8 @@ You'll need to create an XML file that consists of the configuration you want th
 
 The files should be created with the mac address of the device.
 ## Required Support folders
-The database.json file has been moved to a backend MySQL database powered by Sequelize. You'll need to create a "config" folder with "config.json" file.
+The database.json file has been moved to a backend MySQL database powered by Sequelize. Database connection for Configuration is done via the secrets/config.json. Rename the config.json-example to config.json and populate the necessary fields.
 
-An example file exists which will need to be copied to "config.json" and then modify the relevant parts for the database connection.
 
  **note that initially all lookups occur out of './lib/databaseCommands.js' and the replacement of json backend to database backend was mostly completed here** Some additional database commands are occurring in the admin API.
 
