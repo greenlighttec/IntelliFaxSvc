@@ -10,9 +10,9 @@ var getAPICall = function (req, res, next) {
 	        case "/admin/api/getallaccounts":
 		 //establish ClientID list associated with the user
 		 var sessionId =  req.cookies.sessionId
-		 clients.findClientsByUserScope(sessionId, (result) => {
+		 clients.findClientsByUserScope(sessionId, (err,result) => {
 		 if (result[0].dataValues.id == 0) {
-	                 clients.findAllByStatement({}, (client) => {
+	                 clients.findAllByStatement({}, (err,client) => {
                          //console.log(client);
                          res.status(200).send(client)
                  	 });
@@ -25,7 +25,7 @@ var getAPICall = function (req, res, next) {
                 case "/admin/api/getalldevices":
                  //establish ClientID list associated with the user
                  var sessionId =  req.cookies.sessionId
-                 clients.findClientsByUserScope(sessionId, (result) => {
+                 clients.findClientsByUserScope(sessionId, (err,result) => {
                  if (result[0].dataValues.id == 0) {
                          devices.findAllByStatement({attributes: ['id', 'clientid', 'name', 'macaddr', 'line1', 'line2', 'username', 'createdAt', 'updatedAt']}, (device) => {
                          //console.log(client);
@@ -41,7 +41,9 @@ var getAPICall = function (req, res, next) {
 
                  break;
 
-
+		case "/admin/api/getallphonenumbers":
+		
+		break;
 		case "/admin/logout":
 		  dbCommands.userLogout(req.cookies.sessionId, (result) => {
 			res.status(200).redirect('/login')})
@@ -58,7 +60,7 @@ var postAPICall = function (req, res, next) {
 
         switch (req.path) {
 
-                case "/admin/api/createcustomers":
+                case "/admin/api/createAccount":
 		 var accountId = req.body.accountId
 		 var accountName = req.body.accountName
                  if (accountId && accountName) {clients.updateRecordByWhereStatement({id: accountId},{clientname: accountName},(result) => {
@@ -82,8 +84,8 @@ var postAPICall = function (req, res, next) {
 		 if (accountId && accountName) {
 			clients.deleteClientByWhereStatement({where: {id: accountId}}, (result) => {
                         if (result) {
-                                res.status(200).redirect('/admin/resources/html/success.html')
-                        } else {res.status(400).redirect(req.header('Referer')).send("Updated failed, ID or AccountName is null")}
+                                res.status(200).redirect(req.header('Referer'))
+                        } else {res.status(400).redirect(req.header('Referer')) } //.send("Updated failed, ID or AccountName is null")}
 		 });
 		 } else {res.status(400).redirect(req.header('Referer')).send("Customer Account Deletion failed, account name must be specified")}
 		 break;

@@ -145,7 +145,9 @@ app.get('/admin/resources/*', authenticateUsers, (req, res) => {
 });
 
 app.get('/admin', authenticateUsers, (req, res) => {
-	res.render('admin/index', {path: req.path.split('/')[1]})
+ var requestedPage = req.path.split('/')[1]
+    var templateObject = {cardHeaderName: "Admin Dashboard", tableClassName: "DivAdminDash", formCreateApiEndpoint: undefined, formId: undefined, frontEndScriptName: "admin.js", path: requestedPage}
+	res.render('admin/index', {obj: templateObject})
 });
 
 app.get('/admin/*', authenticateUsers, (req, res) => {
@@ -176,7 +178,7 @@ app.get('/admin/*', authenticateUsers, (req, res) => {
 
  }
 
-	res.render('admin/template/body', templateObject, (err, html) => {
+	res.render('admin/template/body', {obj: templateObject}, (err, html) => {
 		if (err) {console.log(err);
                         res.status(404).redirect('/404')
 		}

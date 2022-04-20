@@ -1,0 +1,20 @@
+
+          <div class="col-12">
+            <div class="input-group">
+              <div class="input-group-text" id="accountIdLabel">@</div>
+              <input type="hidden" id="accountId" name="accountId">
+              <input type="text" class="form-control" id="accountName" name="accountName" placeholder="Account Name" onclick="activateForm()" />
+            </div>
+          </div>
+
+          <div class="col-12">
+            <button type="submit" id="deleteAccount" formaction="/admin/api/deleteAccount" class="btn btn-danger" disabled>Delete Account</button>
+          </div>
+
+          <div class="col-12">
+           <button type="button" id="resetForm" onClick="resetFormData()" class="btn btn-warning" disabled>Clear Form</button>
+          </div>
+
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary" id="customerAccountButton">Create Account</button>
+          </div>
