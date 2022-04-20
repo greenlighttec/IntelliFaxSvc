@@ -6,10 +6,13 @@ let tableHeaders = [
 	  sortable: true,
 	  filter: true
 	},
-	{ headerName: 'Customer Name',
-	  field: "clientname",
+	{ headerName: 'Phone Number',
+	  field: "phonenumber",
 	  sortable: true,
 	  filter: true
+	},
+	{ headername: "Line #",
+	  field: "line"
 	},
 	{ headerName: 'Created (UTC)',
 	  field: "createdAt",

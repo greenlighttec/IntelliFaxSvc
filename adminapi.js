@@ -1,6 +1,6 @@
 const tools = require('./lib/tools.js');
 const clients = require('./lib/admin/ClientAccounts.js');
-const dbCommands = require('./lib/databaseCommands.js');
+const dbCommands = require('./lib/databaseCommands');
 const devices = require('./lib/admin/Devices.js');
 
 var getAPICall = function (req, res, next) {
@@ -10,15 +10,9 @@ var getAPICall = function (req, res, next) {
 	        case "/admin/api/getallaccounts":
 		 //establish ClientID list associated with the user
 		 var sessionId =  req.cookies.sessionId
-		 clients.findClientsByUserScope(sessionId, (err,result) => {
-		 if (result[0].dataValues.id == 0) {
-	                 clients.findAllByStatement({}, (err,client) => {
-                         //console.log(client);
-                         res.status(200).send(client)
-                 	 });
-		 } else { res.status(200).send(result) }
-
-		 });
+                 dbCommands.apiLookupClientsBySession(sessionId)
+                 .then(returnedData =>  res.status(200).send(returnedData))
+                 .catch(error => res.status(400).send(error))
 
        		 break;
 
@@ -42,8 +36,12 @@ var getAPICall = function (req, res, next) {
                  break;
 
 		case "/admin/api/getallphonenumbers":
-		
+                 var sessionId =  req.cookies.sessionId
+		dbCommands.apiLookupRetrieveAllPhoneNumbers(sessionId)
+		 .then(returnedData => 	res.status(200).send(returnedData))
+		 .catch(error => res.status(400).send(error))
 		break;
+
 		case "/admin/logout":
 		  dbCommands.userLogout(req.cookies.sessionId, (result) => {
 			res.status(200).redirect('/login')})
