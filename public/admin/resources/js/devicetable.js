@@ -1,4 +1,4 @@
-const pageTableDiv = document.querySelector(".DivFaxNumberTable");
+const pageTableDiv = document.querySelector(".DivDevicesTable");
 
 let tableHeaders = [
 	{ headerName: 'Client Name',
@@ -6,13 +6,28 @@ let tableHeaders = [
 	  sortable: true,
 	  filter: true
 	},
-	{ headerName: 'Phone Number',
-	  field: "phonenumber",
+	{ headerName: 'Device Name',
+	  field: "name",
 	  sortable: true,
 	  filter: true
 	},
-	{ headerName: "Line #",
-	  field: "line"
+	{ headerName: 'MAC Address',
+	  field: "macaddr",
+	  sortable: true,
+	  filter: true
+	},
+	{ headerName: 'Device Username',
+	  field: "username",
+	  sortable: true,
+	  filter: true
+	},
+	{ headerName: "Line 1",
+	  field: "line1",
+	  filter: true
+	},
+	{ headerName: 'Line 2',
+	  field: "line2",
+	  filter: true
 	},
 	{ headerName: 'Created (UTC)',
 	  field: "createdAt",
@@ -44,12 +59,10 @@ const createTable = (dataObject) => {
 }
 
 const getTableData = () => {
-	fetch('/admin/api/getallphonenumbers') // Fetch for all scores. The response is an array of objects that is sorted in decreasing order
+	fetch('/admin/api/getalldevices') // Fetch for all scores. The response is an array of objects that is sorted in decreasing order
 	.then(res => res.json())
-	.then(accounts => {
-		createTable(accounts) // Clears scoreboard div if it has any children nodes, creates & appends the table
-		//console.log(accounts)
-		// Iterates through all the objects in the scores array and appends each one to the table body
+	.then(tableData => {
+		createTable(tableData)
 	})
 }
 

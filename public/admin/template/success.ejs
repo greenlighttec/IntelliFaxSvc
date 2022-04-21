@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<%- include ("./styling.ejs",{path: obj.path}) %>
+
+
+  <!--Main layout-->
+  <main style="margin-top: 58px">
+    <div class="container pt-4">
+
+      <section class="mb-4">
+        <div class="card">
+          <div class="card-header text-center py-3">
+            <h5 class="mb-0 text-center">
+              <strong><%= obj.method %> <%= obj.result %></strong>
+            </h5>
+          </div>
+          <div class="card-body">
+	<% if (obj.result == 'Success') {
+	  if (obj.method == 'Delete' || obj.method == 'Update') { %>
+		<%= obj.data %> <%= obj.method %>d record.
+	<% } else if (obj.method == 'Create') { %>
+		<%= obj.data.clientname %> <%= obj.method %>d record
+	<% }
+	 }
+	 else if (obj.result == 'Failed') { %>
+		Failed to <%= obj.method %> record. <br/> Error <%= obj.data.errorMessage %>
+	<% } %>
+	  <div>
+		<button type="buton" class="btn btn-primary" onclick="window.close()">Close</button>
+	 </div>
+          </div>
+        </div>
+      </section>
+
+
+  </main>
+  <!--Main layout-->
+  <!-- MDB -->
+  <script type="text/javascript" src="/admin/resources/js/mdb.min.js"></script>
+
+</body>
+
+</html>

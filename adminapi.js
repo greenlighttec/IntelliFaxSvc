@@ -19,7 +19,10 @@ var getAPICall = function (req, res, next) {
                 case "/admin/api/getalldevices":
                  //establish ClientID list associated with the user
                  var sessionId =  req.cookies.sessionId
-                 clients.findClientsByUserScope(sessionId, (err,result) => {
+		dbCommands.apiLookupAllDevices(sessionId)
+		.then(returnedData => res.status(200).send(returnedData))
+		.catch(error => res.status(400).send(error))
+                /*  clients.findClientsByUserScope(sessionId, (err,result) => {
                  if (result[0].dataValues.id == 0) {
                          devices.findAllByStatement({attributes: ['id', 'clientid', 'name', 'macaddr', 'line1', 'line2', 'username', 'createdAt', 'updatedAt']}, (device) => {
                          //console.log(client);
@@ -31,17 +34,24 @@ var getAPICall = function (req, res, next) {
 			});
 		   }
 
-                 });
+                 }); */
 
                  break;
 
 		case "/admin/api/getallphonenumbers":
                  var sessionId =  req.cookies.sessionId
-		dbCommands.apiLookupRetrieveAllPhoneNumbers(sessionId)
+		dbCommands.apiLookupAllPhoneNumbers(sessionId)
 		 .then(returnedData => 	res.status(200).send(returnedData))
 		 .catch(error => res.status(400).send(error))
 		break;
 
+		case "/admin/api/getallusers":
+		var sessionId =  req.cookies.sessionId
+		dbCommands.apiLookupAdminUsers(sessionId)
+		 .then(returnedData => res.status(200).send(returnedData))
+		 .catch(error => res.status(403).send(error))
+
+		break;
 		case "/admin/logout":
 		  dbCommands.userLogout(req.cookies.sessionId, (result) => {
 			res.status(200).redirect('/login')})
@@ -57,37 +67,103 @@ var getAPICall = function (req, res, next) {
 var postAPICall = function (req, res, next) {
 
         switch (req.path) {
+		//This entire endpoint needs to be updated to use dbCommands
 
                 case "/admin/api/createAccount":
 		 var accountId = req.body.accountId
 		 var accountName = req.body.accountName
-                 if (accountId && accountName) {clients.updateRecordByWhereStatement({id: accountId},{clientname: accountName},(result) => {
-			if (result) {
-				res.sendStatus(200).redirect(req.header('Referer'))
-			} else {res.sendStatus(400).redirect(req.header('Referer'))} //.send("Updated failed, ID or AccountName is null")}
+                 if (accountId && accountName) {clients.updateRecordByWhereStatement({id: accountId},{clientname: accountName},(err,result) => {
+
+			if (err) {
+                                res.render('admin/template/success', {obj: {result: 'Failed', method: 'Update', data: err}}, (err, html) => {
+                                        if (err) {console.log(err);
+                                         res.status(404).redirect('/404')
+                                        }
+                                        else {res.send(html)}
+                                });
+			} else if (result) {
+			        res.render('admin/template/success', {obj: {result: 'Success', method: 'Update', data: result}}, (err, html) => {
+        			        if (err) {console.log(err);
+                       			 res.status(404).redirect('/404')
+                			}
+                			else {res.send(html)}
+	        		});
+			} else {
+                                res.render('admin/template/success', {obj: {result: 'Failed', method: 'Update', data: 'Unknown Error'}}, (err, html) => {
+                                        if (err) {console.log(err);
+                                         res.status(404).redirect('/404')
+                                        }
+                                        else {res.send(html)}
+                                });
+			}
 		 })}
 
 		 else {
 		   if (accountName) {
-			clients.create(accountName,(result) => {
-			res.status(200).redirect(req.header('Referer'))
+			clients.create(accountName,(err,result) => {
+                        if (err) {
+                                res.render('admin/template/success', {obj: {result: 'Failed', method: 'Create', data: err}}, (err, html) => {
+                                        if (err) {console.log(err);
+                                         res.status(404).redirect('/404')
+                                        }
+                                        else {res.send(html)}
+                                });
+                        } else if (result) {
+                                res.render('admin/template/success', {obj: {result: 'Success', method: 'Create', data: result}}, (err, html) => {
+                                        if (err) {console.log(err);
+                                         res.status(404).redirect('/404')
+                                        }
+                                        else {res.send(html)}
+                                });
+                        }
+
 		 	})}
-		  else {res.status(400).redirect(req.header('Referer')) } //.send("Customer Account Creation failed, account name must be specified")}
+
+		 else {
+
+                                res.render('admin/template/success', {obj: {result: 'Failed', method: 'Create', data: {errorMessage: 'Account Name must be specified'}}}, (err, html) => {
+                                        if (err) {console.log(err);
+                                         res.status(404).redirect('/404')
+                                        }
+                                        else {res.status(400).send(html)}
+                                });
+
 		   }
+     }
                  break;
 
 		case "/admin/api/deleteAccount":
 		 var accountId = req.body.accountId
 		 var accountName = req.body.accountName
 		 if (accountId && accountName) {
-			clients.deleteClientByWhereStatement({where: {id: accountId}}, (result) => {
-                        if (result) {
-                                res.status(200).redirect(req.header('Referer'))
-                        } else {res.status(400).redirect(req.header('Referer')) } //.send("Updated failed, ID or AccountName is null")}
+			clients.deleteClientByWhereStatement({where: {id: accountId}}, (err,result) => {
+                        if (err) {
+                                res.render('admin/template/success', {obj: {result: 'Failed', method: 'Delete', data: err}}, (err, html) => {
+                                        if (err) {console.log(err);
+                                         res.status(404).redirect('/404')
+                                        }
+                                        else {res.send(html)}
+                                });
+                        } else if (result) {
+                                res.render('admin/template/success', {obj: {result: 'Success', method: 'Delete', data: result}}, (err, html) => {
+                                        if (err) {console.log(err);
+                                         res.status(404).redirect('/404')
+                                        }
+                                        else {res.send(html)}
+                                });
+                        }
 		 });
-		 } else {res.status(400).redirect(req.header('Referer')).send("Customer Account Deletion failed, account name must be specified")}
+		 } else {
+                                     res.render('admin/template/success', {obj: {result: 'Failed', method: 'Delete', data: {errorMessage: 'Account Name must be specified'}}}, (err, html) => {
+                                        if (err) {console.log(err);
+                                         res.status(404).redirect('/404')
+                                        }
+                                        else {res.status(400).send(html)}
+                                });
+     
+     }
 		 break;
-
+		// Until here
 		case "/admin/login":
 		 let username = req.body.loginUsername
 		 let password = req.body.loginPassword

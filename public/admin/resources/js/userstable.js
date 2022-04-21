@@ -1,4 +1,4 @@
-const pageTableDiv = document.querySelector(".DivFaxNumberTable");
+const pageTableDiv = document.querySelector(".DivUsersTable");
 
 let tableHeaders = [
 	{ headerName: 'Client Name',
@@ -6,13 +6,23 @@ let tableHeaders = [
 	  sortable: true,
 	  filter: true
 	},
-	{ headerName: 'Phone Number',
-	  field: "phonenumber",
+	{ headerName: 'Client ID',
+	  field: "Client.id",
+	},
+	{ headerName: 'First Name',
+	  field: "firstname",
 	  sortable: true,
 	  filter: true
 	},
-	{ headerName: "Line #",
-	  field: "line"
+	{ headerName: "Last Name",
+	  field: "lastname",
+	  sortable: true,
+	  filter: true
+	},
+	{ headerName: "Username",
+	  field: "username",
+	  sortable: true,
+	  filter: true
 	},
 	{ headerName: 'Created (UTC)',
 	  field: "createdAt",
@@ -44,7 +54,7 @@ const createTable = (dataObject) => {
 }
 
 const getTableData = () => {
-	fetch('/admin/api/getallphonenumbers') // Fetch for all scores. The response is an array of objects that is sorted in decreasing order
+	fetch('/admin/api/getallusers') // Fetch for all scores. The response is an array of objects that is sorted in decreasing order
 	.then(res => res.json())
 	.then(accounts => {
 		createTable(accounts) // Clears scoreboard div if it has any children nodes, creates & appends the table
@@ -57,15 +67,22 @@ getTableData()
 
 pageTableDiv.addEventListener("click", function (event) {
 	if (event.path[0].className == 'ag-cell-value ag-cell ag-cell-not-inline-editing ag-cell-normal-height ag-cell-focus') {
-		var clientId = event.path[1].childNodes[0].innerText;
-		var clientName = event.path[1].childNodes[1].innerText;
-		document.getElementById('accountId').value = clientId
-		document.getElementById('accountIdLabel').innerText = clientId
-		document.getElementById('accountName').className = "form-control active"
-		document.getElementById('accountName').value = clientName
-		document.getElementById('customerAccountButton').innerText = "Update Account"
+		var userId = event.path[1].attributes['row-id'].value
+		var clientName = event.path[1].childNodes[0].innerText;
+		var clientId = event.path[1].childNodes[1].innerText
+		var firstName = event.path[1].childNodes[2].innerText
+                var lastName = event.path[1].childNodes[3].innerText;
+                var userName = event.path[1].childNodes[4].innerText
+;
+		document.getElementById('userId').value = userId
+		document.getElementById('accountIdLabel').innerText = userId
+		document.getElementById('userName').value = userName
+                document.getElementById('userClientId').value = clientId
+                document.getElementById('firstName').value = firstName
+                document.getElementById('lastName').value = lastName
+		document.getElementById('customerAccountButton').innerText = "Update User"
 		document.getElementById('resetForm').disabled = false;
-		document.getElementById('deleteAccount').disabled = false;
+		document.getElementById('deleteUser').disabled = false;
 	 }
 
 });
@@ -77,13 +94,17 @@ function activateForm() {
 }
 
 function resetFormData() {
-   document.getElementById('accountId').value = null
+   var formControls = document.querySelectorAll('.card-body .form-control')
+
+   document.getElementById('userId').value = null
    document.getElementById('accountIdLabel').innerText = "@"
-   document.getElementById('accountName').className = "form-control"
-   document.getElementById('accountName').value = null
+
+   formControls.forEach( (control) => {control.value = null})
+
+
    document.getElementById('customerAccountButton').innerText = "Create Account"
    document.getElementById('resetForm').disabled = true;
-   document.getElementById('deleteAccount').disabled = true;
+   document.getElementById('deleteUser').disabled = true;
 
 
 }

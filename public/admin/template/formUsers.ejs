@@ -1,0 +1,49 @@
+<!-- ROW 1 -->
+<div class="row" id="formRow1"></div>
+	<div class="col-12">
+            <div class="input-group">
+              <div class="input-group-text" id="accountIdLabel">@</div>
+              <input type="hidden" id="userId" name="userId">
+	      <input type="text" class="form-control" id="userName" name="userName" placeholder="UserName" onclick="activateForm()">
+	   </div>
+	</div>
+
+	<div class="col-12">
+                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" onclick="activateForm()" />
+	</div>
+
+	<div class="col-12">
+                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name" onclick="activateForm()" />
+	</div>
+
+  <div class="w-100"></div>
+
+<!-- ROW 2 -->
+<div class="row" id="formRow2"></div>
+	<div class="col-12">
+		<div class="input-group">
+		<div class="input-group-text" id="userPasswordLabel">Password:</div>
+                <input type="password" class="form-control" id="userPassword" name="userPassword" onclick="activateForm()" />
+		</div>
+	</div>
+
+	<div class="col-12">
+                <input type="text" class="form-control" id="userClientId" name="userClientID" placeholder="ClientID" onclick="activateForm()" />
+	</div>
+
+<!-- ROW 3 -->
+  <div class="w-100"></div>
+<div class="row" id="formRow3"></div>
+
+          <div class="col-12">
+            <button type="submit" id="deleteUser" formaction="/admin/api/deleteUser" class="btn btn-danger" disabled>Delete User</button>
+          </div>
+
+          <div class="col-12">
+           <button type="button" id="resetForm" onClick="resetFormData()" class="btn btn-warning" disabled>Clear Form</button>
+          </div>
+
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary" id="customerAccountButton">Create User</button>
+          </div>
+
