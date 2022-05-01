@@ -1,4 +1,4 @@
-const pageTableDiv = document.querySelector(".DivFaxNumberTable");
+const pageTableDiv = document.querySelector(".DivFaxLogTable");
 
 let tableHeaders = [
 	{ headerName: 'Client Name',
@@ -6,14 +6,39 @@ let tableHeaders = [
 	  sortable: true,
 	  filter: true
 	},
-	{ headerName: 'Phone Number',
-	  field: "phonenumber",
+	{ headerName: 'Device Name',
+	  field: "Device.name",
 	  sortable: true,
 	  filter: true
 	},
-	{ headerName: "Line #",
-	  field: "line"
+	{ headerName: "Direction",
+	  field: "direction",
+	  sortable: true,
+	  filter: true
 	},
+	{ headerName: "Fax From",
+	  field: "numberfrom",
+	  sortable: true,
+	  filter: true
+	},
+  { headerName: "Fax To",
+    field: "numberto",
+    sortable: true,
+    filter: true
+  },
+  { headerName: "Status",
+    field: "result",
+    sortable: true,
+    filter: true
+  },
+  { headerName: "Telnyx FaxID",
+    field: "telnyxfaxid",
+    filter: true
+  },
+  { headerName: "ATA FaxID",
+    field: "atafaxid",
+    filter: true
+  },
 	{ headerName: 'Created (UTC)',
 	  field: "createdAt",
 	  sortable: true
@@ -23,23 +48,21 @@ let tableHeaders = [
 	  sortable: true
 	}];
 
-// let the grid know which columns and what data to use
 const gridOptions = {
   columnDefs: tableHeaders,
   getRowId: params => params.data.id,
   getRowClass: params => {
-  if (params.node.rowIndex % 2 === 0) {
-    return 'my-shaded-effect';
-  }}
+    if (params.node.rowIndex % 2 === 0) {
+        return 'my-shaded-effect';
+    }}
 };
 
+
 const refreshTableData = () => {
-	fetch('/admin/api/getallphonenumbers') // Fetch for all scores. The response is an array of objects that is sorted in decreasing order
+	fetch('/admin/api/getfaxlog')
 	.then(res => res.json())
 	.then(accounts => {
-		gridOptions.api.setRowData(accounts) // Clears scoreboard div if it has any children nodes, creates & appends the table
-		//console.log(accounts)
-		// Iterates through all the objects in the scores array and appends each one to the table body
+		gridOptions.api.setRowData(accounts)
 	})
 }
 
@@ -53,5 +76,4 @@ function onFilterTextBoxChanged() {
     document.getElementById('filter-text-box').value
   );
 }
-
 

@@ -38,35 +38,34 @@ let tableHeaders = [
 	  sortable: true
 	}];
 
-const createTable = (dataObject) => {
-
-    const rowData = dataObject
-
-    // let the grid know which columns and what data to use
-    const gridOptions = {
-      columnDefs: tableHeaders,
-      getRowId: params => params.data.id,
-      getRowClass: params => {
-        if (params.node.rowIndex % 2 === 0) {
-            return 'my-shaded-effect';
-        }},
-      rowData: rowData
-    };
-
-  new agGrid.Grid(pageTableDiv, gridOptions);
+// let the grid know which columns and what data to use
+const gridOptions = {
+   columnDefs: tableHeaders,
+   getRowId: params => params.data.id,
+   getRowClass: params => {
+   if (params.node.rowIndex % 2 === 0) {
+        return 'my-shaded-effect';
+   }}
+};
 
 
-}
-
-const getTableData = () => {
+async function refreshTableData()  {
 	fetch('/admin/api/getalldevices') // Fetch for all scores. The response is an array of objects that is sorted in decreasing order
 	.then(res => res.json())
 	.then(tableData => {
-		createTable(tableData)
+		gridOptions.api.setRowData(tableData)
 	})
 }
 
-getTableData()
+
+const getTableData = () => {
+
+}
+
+document.addEventListener('DOMContentLoaded', async function () {
+  new agGrid.Grid(pageTableDiv, gridOptions);
+ refreshTableData()
+});
 
 pageTableDiv.addEventListener("click", function (event) {
 	if (event.path[0].className == 'ag-cell-value ag-cell ag-cell-not-inline-editing ag-cell-normal-height ag-cell-focus') {
@@ -108,9 +107,10 @@ function target_popup(form) {
 
 }
 
-/*$(document).ready(function() {
+function onFilterTextBoxChanged() {
+  gridOptions.api.setQuickFilter(
+    document.getElementById('filter-text-box').value
+  );
+}
 
-	$('#myTable').DataTable();
-'
-})*/
 

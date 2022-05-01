@@ -33,37 +33,43 @@ let tableHeaders = [
 	  sortable: true
 	}];
 
-const createTable = (dataObject) => {
-
-    const rowData = dataObject
-
-    // let the grid know which columns and what data to use
     const gridOptions = {
       columnDefs: tableHeaders,
+      rowSelection: 'single',
       getRowId: params => params.data.id,
       getRowClass: params => {
         if (params.node.rowIndex % 2 === 0) {
             return 'my-shaded-effect';
-        }},
-      rowData: rowData
+        }}
     };
 
-  new agGrid.Grid(pageTableDiv, gridOptions);
-
-
+function loadSelector(data) {
+    data.forEach(client => { 
+    $("#clientDropdownSelect").append('<option value="'+client.id+'">'+client.clientname+'</option>').selectpicker("refresh");;
+    })
 }
 
-const getTableData = () => {
-	fetch('/admin/api/getallusers') // Fetch for all scores. The response is an array of objects that is sorted in decreasing order
+const refreshTableData = () => {
+	fetch('/admin/api/getallusers')
 	.then(res => res.json())
 	.then(accounts => {
-		createTable(accounts) // Clears scoreboard div if it has any children nodes, creates & appends the table
-		//console.log(accounts)
-		// Iterates through all the objects in the scores array and appends each one to the table body
+		gridOptions.api.setRowData(accounts)
 	})
 }
 
-getTableData()
+const refreshSelectorData = () => {
+	fetch('/admin/api/getallaccounts')
+	.then(res => res.json())
+	.then(data => {
+		loadSelector(data)
+	})
+}
+
+document.addEventListener('DOMContentLoaded', async function () {
+  new agGrid.Grid(pageTableDiv, gridOptions);
+ refreshTableData()
+ refreshSelectorData()
+});
 
 pageTableDiv.addEventListener("click", function (event) {
 	if (event.path[0].className == 'ag-cell-value ag-cell ag-cell-not-inline-editing ag-cell-normal-height ag-cell-focus') {
@@ -71,15 +77,22 @@ pageTableDiv.addEventListener("click", function (event) {
 		var clientName = event.path[1].childNodes[0].innerText;
 		var clientId = event.path[1].childNodes[1].innerText
 		var firstName = event.path[1].childNodes[2].innerText
-                var lastName = event.path[1].childNodes[3].innerText;
-                var userName = event.path[1].childNodes[4].innerText
-;
+		var lastName = event.path[1].childNodes[3].innerText;
+	 	var userName = event.path[1].childNodes[4].innerText;
+
 		document.getElementById('userId').value = userId
-		document.getElementById('accountIdLabel').innerText = userId
+		//document.getElementById('accountIdLabel').innerText = userId
 		document.getElementById('userName').value = userName
-                document.getElementById('userClientId').value = clientId
-                document.getElementById('firstName').value = firstName
-                document.getElementById('lastName').value = lastName
+ 		//document.getElementById('userClientId').value = clientId
+		document.getElementById('firstName').value = firstName
+		document.getElementById('lastName').value = lastName
+
+		jQuery("#clientDropdownSelect option").filter(function(){
+		    return $.trim($(this).text()) == clientName
+		}).prop('selected', true);
+		$('#clientDropdownSelect').selectpicker('refresh');
+
+
 		document.getElementById('customerAccountButton').innerText = "Update User"
 		document.getElementById('resetForm').disabled = false;
 		document.getElementById('deleteUser').disabled = false;
@@ -93,13 +106,22 @@ function activateForm() {
 
 }
 
+function onFilterTextBoxChanged() {
+  gridOptions.api.setQuickFilter(
+    document.getElementById('filter-text-box').value
+  );
+}
+
 function resetFormData() {
    var formControls = document.querySelectorAll('.card-body .form-control')
 
    document.getElementById('userId').value = null
-   document.getElementById('accountIdLabel').innerText = "@"
+   document.getElementById('accountIdLabel').innerText = "account_circle"
+   document.querySelectorAll('.ag-row-selected').forEach( (control) => {control.classList.remove('ag-row-selected')})
 
    formControls.forEach( (control) => {control.value = null})
+   $("#clientDropdownSelect").val('default').selectpicker("refresh");
+
 
 
    document.getElementById('customerAccountButton').innerText = "Create Account"
@@ -110,15 +132,10 @@ function resetFormData() {
 }
 
 function target_popup(form) {
+    if (document.querySelector('#userPassword').value != '') {document.querySelector('#userPasswordData').value = document.querySelector('#userPassword').value}
     window.open('', 'formpopup', 'width=400,height=400,resizeable,scrollbars');
     form.target = 'formpopup';
     location.reload()
 
 }
-
-/*$(document).ready(function() {
-
-	$('#myTable').DataTable();
-'
-})*/
 

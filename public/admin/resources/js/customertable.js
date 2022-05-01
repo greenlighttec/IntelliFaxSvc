@@ -20,35 +20,29 @@ let tableHeaders = [
           sortable: true
         }];
 
-const createTable = (dataObject) => {
-
-    const rowData = dataObject
-
-    // let the grid know which columns and what data to use
-    const gridOptions = {
+// let the grid know which columns and what data to use
+ const gridOptions = {
       columnDefs: tableHeaders,
       getRowId: params => params.data.id,
       getRowClass: params => {
         if (params.node.rowIndex % 2 === 0) {
             return 'my-shaded-effect';
-        }},
-      rowData: rowData
+        }}
     };
 
+async function refreshTableData()  {
+ let response = await fetch('/admin/api/getallaccounts');
+ let accounts = await response.json();
+ //accounts.map(i => console.log(i));
+ gridOptions.api.setRowData(accounts)
+}
+
+
+document.addEventListener('DOMContentLoaded', async function () {
   new agGrid.Grid(pageTableDiv, gridOptions);
+ refreshTableData()
+});
 
-
-}
-
-const getTableData = () => {
-	fetch('/admin/api/getallaccounts')
-	.then(res => res.json())
-	.then(accounts => {
-		createTable(accounts)
-	})
-}
-
-getTableData()
 
 pageTableDiv.addEventListener("click", function (event) {
 	if (event.path[0].className == 'ag-cell-value ag-cell ag-cell-not-inline-editing ag-cell-normal-height ag-cell-focus') {
@@ -64,6 +58,12 @@ pageTableDiv.addEventListener("click", function (event) {
 	 }
 
 });
+
+function onFilterTextBoxChanged() {
+  gridOptions.api.setQuickFilter(
+    document.getElementById('filter-text-box').value
+  );
+}
 
 function activateForm() {
 

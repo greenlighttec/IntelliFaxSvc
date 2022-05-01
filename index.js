@@ -18,8 +18,7 @@ const faxStatus = require('./lib/faxing/ReportDeliveryStatus.js');
 
 // load required admin libraries
 const authenticateUsers = require('./lib/admin/AuthenticateUsers.js');
-const adminApiCalls = require('./adminapi.js');
-const clients = require('./lib/admin/ClientAccounts.js');
+const adminApiCalls = require('./lib/admin/api');
 
 const host = '0.0.0.0';
 const port = 8340;
