@@ -60,7 +60,36 @@ const gridOptions = {
 };
 
 function populateForm(event) {
-	console.log(event)
+	if (event.node.selected) {
+		console.log(event)
+		let selectedData = event.data
+		var clientName = selectedData.Client.clientname
+		var deviceId = selectedData.id
+		var deviceLine1 =  selectedData.line1
+		var deviceLine2 = selectedData.line2
+		var deviceMacaddr = selectedData.macaddr
+		var deviceName = selectedData.name
+		var deviceUsername = selectedData.username
+		document.getElementById('deviceId').value = deviceId
+		document.getElementById('deviceName').innerText = deviceName
+		document.getElementById('deviceAuthName').innerText = deviceUsername
+		document.getElementById('deviceLine1').innerText = deviceLine1
+		document.getElementById('deviceLine2').innerText = deviceLine2
+		document.getElementById('deviceMacaddr').innerText = deviceMacaddr
+		//document.getElementById('accountName').className = "form-control active"
+		//document.getElementById('accountName').value = clientName
+
+		jQuery("#clientDropdownSelect option").filter(function(){
+		    return $.trim($(this).text()) == clientName
+		}).prop('selected', true);
+		$('#clientDropdownSelect').selectpicker('refresh');
+
+		document.getElementById('customerAccountButton').innerText = "Update Account"
+		document.getElementById('resetForm').disabled = false;
+		document.getElementById('deleteAccount').disabled = false;
+
+	}
+	
 }
 function loadSelector(data) {
 	data.forEach(client => {
@@ -91,7 +120,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 	refreshSelectorData()
 });
 
-pageTableDiv.addEventListener("click", function (event) {
+/* pageTableDiv.addEventListener("click", function (event) {
 	if (event.path[0].className == 'ag-cell-value ag-cell ag-cell-not-inline-editing ag-cell-normal-height ag-cell-focus') {
 		var clientId = event.path[1].childNodes[0].innerText;
 		var clientName = event.path[1].childNodes[1].innerText;
@@ -104,7 +133,7 @@ pageTableDiv.addEventListener("click", function (event) {
 		document.getElementById('deleteAccount').disabled = false;
 	}
 
-});
+}); */
 
 function activateForm() {
 
@@ -113,10 +142,17 @@ function activateForm() {
 }
 
 function resetFormData() {
-	document.getElementById('accountId').value = null
+
+	var formControls = document.querySelectorAll('.card-body .form-control')
+
+	/*document.getElementById('accountId').value = null
 	document.getElementById('accountIdLabel').innerText = "@"
 	document.getElementById('accountName').className = "form-control"
-	document.getElementById('accountName').value = null
+	document.getElementById('accountName').value = null */
+	
+	formControls.forEach( (control) => {control.value = null})
+   $("#clientDropdownSelect").val('default').selectpicker("refresh");
+	
 	document.getElementById('customerAccountButton').innerText = "Create Account"
 	document.getElementById('resetForm').disabled = true;
 	document.getElementById('deleteAccount').disabled = true;

@@ -82,13 +82,13 @@
 	<!-- Section 3: Contains buttons for form submission -->
 	<div class="row text-center">
 		<div class="col-md">
-			<button id="button1id" name="button2id" class="btn btn-danger ripple-surface">Delete Device</button>
+			<button type="submit" id="deleteUser" formaction="/admin/api/deleteUser" class="btn btn-danger ripple-surface" disabled>Delete Device</button>
 		</div>
 		<div class="col-md">
-			<button id="button2id" name="button3id" class="btn btn-warning ripple-surface">Reset Form</button>
+			<button type="button" id="resetForm" onClick="resetFormData()" class="btn btn-warning ripple-surface" disabled>Reset Form</button>
 		</div>
 		<div class="col-md">
-			<button id="button3id" name="button1id" class="btn btn-primary ripple-surface">Create Device</button>
+			<button type="submit" id="customerAccountButton" class="btn btn-primary ripple-surface">Create Device</button>
 		</div>
 	</div>
 </form>
