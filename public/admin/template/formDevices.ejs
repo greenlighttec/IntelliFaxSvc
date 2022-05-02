@@ -1,74 +1,59 @@
-<form action="/admin/api/createDevice" method="POST" id="formUpdateDeviceCreation" class="row row-cols-lg-auto g-3 align-items-center" onsubmit="target_popup(this)">
-<div class="card-body">
-<!-- ROW 1: Contains Device Name, Mac Addr, Password -->
+<form action="/admin/api/createDevice" method="POST" id="formUpdateDeviceCreation" onsubmit="target_popup(this)"
+	_lpchecked="1">
 
-<div class="row row-cols-md-auto g-2 input-group" id="formRow1">
-
-	<div class="form-group">
-	  <label class="col-md control-label" for="deviceName">Device Name</label>  
-	  <div class="col-md">
-	    <input id="deviceName" name="deviceName" type="text" placeholder="IntelliComp Test Demo Fax" class="form-control input-md" required="">
-	    <span class="help-block">Provide a friendly name for the device</span>  
-	  </div>
+	<!-- ROW 1: Contains Device Name, Mac Addr, Password -->
+	<div class="row">
+		<div class="col-md">
+			<label class="control-label" for="deviceName">Device Name</label>
+			<input id="deviceName" name="deviceName" type="text" placeholder="IntelliComp Test Demo Fax"
+				class="form-control input-md" required=""
+				style="background-image: none; background-repeat: initial; background-attachment: initial; background-size: initial; background-position: initial; cursor: auto;">
+			<p class="help-block"><small>Provide a friendly name for the device.</small></p>
+		</div>
+		<div class="col-md">
+			<label class="control-label" for="deviceMacaddr">MAC Address</label>
+			<input id="deviceMacaddr" name="deviceMacaddr" type="text" placeholder="00112233CCFF"
+				class="form-control input-md">
+			<p class="help-block"><small>Provide the Physical MAC Address of the gateway.</small></p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md">
+			<label class="col-md control-label" for="devicePassword">Device Password</label>
+			<input id="devicePassword" name="devicePassword" type="password" placeholder="Password1"
+				class="form-control input-md" required=""
+				style="background-image: none; background-repeat: initial; background-attachment: initial; background-size: initial; background-position: initial; cursor: auto;">
+			<p class="help-block"><small>Provide the authentication password for the device to communicate.</small>
+			</p>
+		</div>
 	</div>
 
-	<div class="form-group">
-	  <label class="col-md control-label" for="deviceMacaddr">MAC Address</label>  
-  	  <div class="col-md">
-	    <input id="deviceMacaddr" name="deviceMacaddr" type="text" placeholder="00112233CCFF" class="form-control input-md">
-  	    <span class="help-block">Provide the Physical MAC Address of the gateway</span>  
-  	  </div>
+	<!-- ROW 2: Contains Client, and Phone Numbers -->
+	<div class="row">
+		<div class="col-md">
+			<label class="col-md control-label" for="deviceLine1">Line 1</label>
+			<div class="input-group">
+				<div class="input-group-text">#</div>
+				<input id="deviceLine1" name="deviceLine1" class="form-control" placeholder="+14105554932" type="text">
+			</div>
+			<p class="help-block"><small>Provide the fax number for line 1.</small></p>
+		</div>
+		<div class="col-md">
+			<label class="col-md control-label" for="deviceLine2">Line 2</label>
+			<div class="input-group">
+				<div class="input-group-text">#</div>
+				<input id="deviceLine2" name="deviceLine2" class="form-control" placeholder="+14105554933" type="text">
+			</div>
+			<p class="help-block"><small>Provide the fax number for line 2.</small></p>
+		</div>
 	</div>
 
-	<div class="form-group">
-	  <label class="col-md control-label" for="devicePassword">Device Password</label>
-	  <div class="col-md">
-	    <input id="devicePassword" name="devicePassword" type="password" placeholder="Password1" class="form-control input-md" required="">
-	    <span class="help-block">Provide the authentication password for the device to communicate</span>
-	  </div>
+	<!-- ROW 3: Contains buttons for form submission -->
+	<div class="row text-center">
+		<div class="col-md">
+			<button id="button2id" name="button2id" class="btn btn-danger ripple-surface">Delete Device</button>
+			<button id="button3id" name="button3id" class="btn btn-warning ripple-surface">Reset Form</button>
+			<button id="button1id" name="button1id" class="btn btn-primary ripple-surface">Create Device</button>
+		</div>
 	</div>
-
-</div>
-
-<!-- ROW 2: Contains Client, and Phone Numbers -->
-
-<div class="row row-cols-md-auto g-2 input-group" id="formRow2">
-
-	<div class="form-group">
-	  <label class="col-md control-label" for="deviceLine1">Line 1</label>
-	  <div class="col-md">
-	    <div class="input-group">
-	      <span class="input-group-addon">#</span>
-	      <input id="deviceLine1" name="deviceLine1" class="form-control" placeholder="+14105554932" type="text">
-	    </div>
-	  <p class="help-block">Provide the fax number for line 1</p>
-	  </div>
-	</div>
-
-	<div class="form-group">
-	  <label class="col-md control-label" for="deviceLine2">Line 2</label>
-	  <div class="col-md">
-	    <div class="input-group">
-	      <span class="input-group-addon">#</span>
-	      <input id="deviceLine2" name="deviceLine2" class="form-control" placeholder="+14105554933" type="text">
-	    </div>
-	    <p class="help-block">Provide the fax number for line 2</p>
-	  </div>
-	</div>
-</div>
-
-<!-- ROW 3: Contains buttons for form submission -->
-
-<div class="row row-cols-md-auto g-2 input-group" id="formRow3">
-
-	<div class="form-group">
-	  
-	  <div class="col-md-12">
-	    <button id="button2id" name="button2id" class="btn btn-danger ripple-surface">Delete Device</button>
-	    <button id="button3id" name="button3id" class="btn btn-warning ripple-surface">Reset Form</button>
-	    <button id="button1id" name="button1id" class="btn btn-primary ripple-surface">Create Device</button>
-	  </div>
-	</div>
-</div>
-</div>
 </form>
