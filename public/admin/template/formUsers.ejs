@@ -1,7 +1,7 @@
 <form action="/admin/api/create<%= obj.formCreateApiEndpoint %>" method="POST" id="<%= obj.formId %>Creation"
 	onsubmit="target_popup(this)">
 
-	<!-- Section 1 -->
+	<!-- Section 1: User Login -->
 	<div class="row pb-3">
 		<div class="col-md">
 			<div class="form-group">
@@ -29,7 +29,7 @@
 		</div>
 	</div>
 
-	<!-- Section 2 -->
+	<!-- Section 2: User Information -->
 	<div class="row pb-3">
 		<div class="col-md">
 			<div class="form-group">
@@ -51,15 +51,19 @@
 		</div>
 	</div>
 
-	<!-- Section 3 -->
-	<div class="row pt-3 text-center">
+	<!-- Section 3: Client Selection -->
+	<div class="row pb-3">
 		<div class="col-md">
 			<div class="form-group">
-				<select id="clientDropdownSelect" title="Select Client" name="clientId"
-					class="form-control selectpicker" data-live-search="true">
-				</select>
+				<label class="control-label" for="clientDropdownSelect">Client</label>
+				<select id="clientDropdownSelect" title="...." name="clientId" class="form-control selectpicker"
+					data-live-search="true"></select>
 			</div>
 		</div>
+	</div>
+
+	<!-- Section 4: Form Buttons -->
+	<div class="row pt-3 text-center">
 		<div class="col-md">
 			<button type="submit" id="deleteUser" formaction="/admin/api/deleteUser" class="btn btn-danger"
 				disabled>Delete
