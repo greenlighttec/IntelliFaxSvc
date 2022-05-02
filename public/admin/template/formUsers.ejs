@@ -1,61 +1,76 @@
-<form action="/admin/api/create<%= obj.formCreateApiEndpoint %>" method="POST" id="<%= obj.formId %>Creation" class="row row-cols-lg-auto g-3 align-items-center" onsubmit="target_popup(this)">
-<!-- ROW 1 -->
-<div class="row row-cols-md-auto g-2 input-group" id="formRow1">
-	<div class="col-12">
-            <div class="input-group">
-	      <div class="input-group-text"><span class="material-icons-outlined" id="accountIdLabel">account_circle</span></div>
-              <input type="hidden" id="userId" name="userId">
-	      <input type="text" class="form-control" id="userName" name="userName" placeholder="User Name" onclick="activateForm()">
-	   </div>
+<form action="/admin/api/create<%= obj.formCreateApiEndpoint %>" method="POST" id="<%= obj.formId %>Creation"
+	onsubmit="target_popup(this)">
+
+	<!-- Section 1 -->
+	<div class="row pb-3">
+		<div class="col-md">
+			<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-text"><span class="material-icons-outlined"
+							id="accountIdLabel">account_circle</span>
+					</div>
+					<input type="hidden" id="userId" name="userId">
+					<input type="text" class="form-control" id="userName" name="userName" placeholder="User Name"
+						onclick="activateForm()">
+				</div>
+			</div>
+		</div>
+		<div class="col-md">
+			<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-text" id="userPasswordLabel"><span
+							class="material-icons-outlined">lock</span>
+					</div>
+					<input type="password" class="form-control" id="userPassword" name="userPasswordField"
+						placeholder="Password" onclick="activateForm()" />
+					<input type="hidden" id="userPasswordData" name="userPassword">
+				</div>
+			</div>
+		</div>
 	</div>
 
-        <div class="col-12">
-                <div class="input-group">
-                <div class="input-group-text" id="userPasswordLabel"><span class="material-icons-outlined">lock</span></div>
-                <input type="password" class="form-control" id="userPassword" name="userPasswordField" placeholder="Password" onclick="activateForm()" />
-		<input type="hidden" id="userPasswordData" name="userPassword">
-                </div>
-        </div>
-</div>
-<!-- ROW 2 -->
-<div class="row row-cols-md-auto g-3 input-group" id="formRow2">
-	<div class="col-12">
-	  <div class="input-group">
-	    <div class="input-group-text"><span class="material-icons-outlined">face</span></div>
-                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" onclick="activateForm()" />
-	  </div>
+	<!-- Section 2 -->
+	<div class="row pb-3">
+		<div class="col-md">
+			<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-text"><span class="material-icons-outlined">face</span></div>
+					<input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name"
+						onclick="activateForm()" />
+				</div>
+			</div>
+		</div>
+		<div class="col-md">
+			<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-text"><span class="material-icons-outlined">face</span></div>
+					<input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name"
+						onclick="activateForm()" />
+				</div>
+			</div>
+		</div>
 	</div>
 
-	<div class="col-12">
-	  <div class="input-group">
-	     <div class="input-group-text"><span class="material-icons-outlined">face</span></div>
-                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name" onclick="activateForm()" />
-	  </div>
+	<!-- Section 3 -->
+	<div class="row pt-3 text-center">
+		<div class="col-md">
+			<div class="form-group">
+				<select id="clientDropdownSelect" title="Select Client" name="clientId"
+					class="form-control selectpicker" data-live-search="true">
+				</select>
+			</div>
+		</div>
+		<div class="col-md">
+			<button type="submit" id="deleteUser" formaction="/admin/api/deleteUser" class="btn btn-danger"
+				disabled>Delete
+				User</button>
+		</div>
+		<div class="col-md">
+			<button type="button" id="resetForm" onClick="resetFormData()" class="btn btn-warning" disabled>Clear
+				Form</button>
+		</div>
+		<div class="col-md">
+			<button type="submit" class="btn btn-primary" id="customerAccountButton">Create User</button>
+		</div>
 	</div>
-
-
-</div>
-<!-- ROW 3 -->
-  <div class="w-100"></div>
-<div class="row row-cols-md-auto g-4 input-group" id="formRow3">
-
-	  <div class="col-12">
-	    <div class="form-group">
-               <select id="clientDropdownSelect" title="Select Client" name="clientId" class="form-control selectpicker" data-live-search="true">
-	       </select>
-	    </div>	
-	  </div>
-          <div class="col-12">
-            <button type="submit" id="deleteUser" formaction="/admin/api/deleteUser" class="btn btn-danger" disabled>Delete User</button>
-          </div>
-
-          <div class="col-12">
-           <button type="button" id="resetForm" onClick="resetFormData()" class="btn btn-warning" disabled>Clear Form</button>
-          </div>
-
-          <div class="col-12">
-            <button type="submit" class="btn btn-primary" id="customerAccountButton">Create User</button>
-          </div>
-</div>
-
 </form>
