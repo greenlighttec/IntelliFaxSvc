@@ -4,53 +4,67 @@
 	<!-- Section 1: Contains Device Name, Mac Addr, Password -->
 	<div class="row">
 		<div class="col-md">
-			<label class="control-label" for="deviceName">Device Name</label>
-			<input id="deviceName" name="deviceName" type="text" placeholder="IntelliComp Test Demo Fax"
-				class="form-control input-md" required=""
-				style="background-image: none; background-repeat: initial; background-attachment: initial; background-size: initial; background-position: initial; cursor: auto;"
-				data-toggle="tooltip" data-placement="bottom" title="Provide a friendly name for the device.">
+			<div class="form-group">
+				<label class="control-label" for="deviceName">Device Name</label>
+				<input id="deviceName" name="deviceName" type="text" placeholder="IntelliComp Test Demo Fax"
+					class="form-control input-md" required=""
+					style="background-image: none; background-repeat: initial; background-attachment: initial; background-size: initial; background-position: initial; cursor: auto;"
+					data-toggle="tooltip" data-placement="bottom" title="Provide a friendly name for the device.">
+			</div>
 		</div>
 		<div class="col-md">
-			<label class="control-label" for="deviceMacaddr">MAC Address</label>
-			<input id="deviceMacaddr" name="deviceMacaddr" type="text" placeholder="00112233CCFF"
-				class="form-control input-md" data-toggle="tooltip" data-placement="bottom"
-				title="Provide the physical MAC Address of the gateway.">
+			<div class="form-group">
+				<label class="control-label" for="deviceMacaddr">MAC Address</label>
+				<input id="deviceMacaddr" name="deviceMacaddr" type="text" placeholder="00112233CCFF"
+					class="form-control input-md" data-toggle="tooltip" data-placement="bottom"
+					title="Provide the physical MAC Address of the gateway.">
+			</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md">
-			<label class="col-md control-label" for="devicePassword">Device Password</label>
-			<input id="devicePassword" name="devicePassword" type="password" placeholder="Password1"
-				class="form-control input-md" required=""
-				style="background-image: none; background-repeat: initial; background-attachment: initial; background-size: initial; background-position: initial; cursor: auto;"
-				data-toggle="tooltip" data-placement="bottom"
-				title="Provide the authentication password for the device to communicate.">
+			<div class="form-group">
+				<label class="col-md control-label" for="devicePassword">Device Password</label>
+				<input id="devicePassword" name="devicePassword" type="password" placeholder="Password1"
+					class="form-control input-md" required=""
+					style="background-image: none; background-repeat: initial; background-attachment: initial; background-size: initial; background-position: initial; cursor: auto;"
+					data-toggle="tooltip" data-placement="bottom"
+					title="Provide the authentication password for the device to communicate.">
+			</div>
 		</div>
 	</div>
 
 	<!-- Section 2: Contains Client, and Phone Numbers -->
 	<div class="row">
 		<div class="col-md">
-			<label class="col-md control-label" for="clientDropdownSelect">Select Client</label>
-			<select id="clientDropdownSelect" title="...." name="clientId" class="form-control selectpicker"
-				data-live-search="true"></select>
+			<div class="form-group">
+				<label class="control-label" for="clientDropdownSelect">Select Client</label>
+				<select id="clientDropdownSelect" title="...." name="clientId" class="form-control selectpicker"
+					data-live-search="true"></select>
+			</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md">
-			<label class="col-md control-label" for="deviceLine1">Line 1</label>
-			<div class="input-group">
-				<div class="input-group-text">#</div>
-				<input id="deviceLine1" name="deviceLine1" class="form-control" placeholder="+14105554932" type="text"
-					data-toggle="tooltip" data-placement="bottom" title="Provide the fax number for line 1.">
+			<div class="form-group">
+				<label class="control-label" for="deviceLine1">Line 1</label>
+				<div class="input-group">
+					<div class="input-group-text">#</div>
+					<input id="deviceLine1" name="deviceLine1" class="form-control" placeholder="+14105554932"
+						type="text" data-toggle="tooltip" data-placement="bottom"
+						title="Provide the fax number for line 1.">
+				</div>
 			</div>
 		</div>
 		<div class="col-md">
-			<label class="col-md control-label" for="deviceLine2">Line 2</label>
-			<div class="input-group">
-				<div class="input-group-text">#</div>
-				<input id="deviceLine2" name="deviceLine2" class="form-control" placeholder="+14105554933" type="text"
-					data-toggle="tooltip" data-placement="bottom" title="Provide the fax number for line 2.">
+			<div class="form-group">
+				<label class="control-label" for="deviceLine2">Line 2</label>
+				<div class="input-group">
+					<div class="input-group-text">#</div>
+					<input id="deviceLine2" name="deviceLine2" class="form-control" placeholder="+14105554933"
+						type="text" data-toggle="tooltip" data-placement="bottom"
+						title="Provide the fax number for line 2.">
+				</div>
 			</div>
 		</div>
 	</div>
