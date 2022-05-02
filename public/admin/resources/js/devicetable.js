@@ -135,4 +135,6 @@ function onFilterTextBoxChanged() {
 	);
 }
 
-
+$(function () {
+	$('[data-toggle="tooltip"]').tooltip()
+  })
