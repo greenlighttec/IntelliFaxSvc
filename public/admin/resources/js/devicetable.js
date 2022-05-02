@@ -46,17 +46,22 @@ let tableHeaders = [
 		sortable: true
 	}];
 
-// let the grid know which columns and what data to use
+
 const gridOptions = {
 	columnDefs: tableHeaders,
+	rowSelection: 'single',
 	getRowId: params => params.data.id,
 	getRowClass: params => {
 		if (params.node.rowIndex % 2 === 0) {
 			return 'my-shaded-effect';
 		}
-	}
+	},
+	onRowSelected: (event) => {populateForm(event)}
 };
 
+function populateForm(event) {
+	console.log(event)
+}
 function loadSelector(data) {
 	data.forEach(client => {
 		$("#clientDropdownSelect").append('<option value="' + client.id + '">' + client.clientname + '</option>').selectpicker("refresh");;
@@ -79,9 +84,6 @@ const refreshSelectorData = () => {
 		})
 }
 
-const getTableData = () => {
-
-}
 
 document.addEventListener('DOMContentLoaded', async function () {
 	new agGrid.Grid(pageTableDiv, gridOptions);
