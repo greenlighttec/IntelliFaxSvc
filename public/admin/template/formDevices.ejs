@@ -13,8 +13,8 @@
 		<div class="col-md">
 			<label class="control-label" for="deviceMacaddr">MAC Address</label>
 			<input id="deviceMacaddr" name="deviceMacaddr" type="text" placeholder="00112233CCFF"
-				class="form-control input-md"
-				data-toggle="tooltip" data-placement="bottom" title="Provide the physical MAC Address of the gateway.">
+				class="form-control input-md" data-toggle="tooltip" data-placement="bottom"
+				title="Provide the physical MAC Address of the gateway.">
 		</div>
 	</div>
 	<div class="row">
@@ -23,15 +23,17 @@
 			<input id="devicePassword" name="devicePassword" type="password" placeholder="Password1"
 				class="form-control input-md" required=""
 				style="background-image: none; background-repeat: initial; background-attachment: initial; background-size: initial; background-position: initial; cursor: auto;"
-				data-toggle="tooltip" data-placement="bottom" title="Provide the authentication password for the device to communicate.">
+				data-toggle="tooltip" data-placement="bottom"
+				title="Provide the authentication password for the device to communicate.">
 		</div>
 	</div>
 
 	<!-- Section 2: Contains Client, and Phone Numbers -->
 	<div class="row">
-		<div class="input-group">
-			<label class="input-group-text" for="clientDropdownSelect">Select Client</label>
-			<select id="clientDropdownSelect" title="Select Client" name="clientId" class="form-control selectpicker" data-live-search="true"></select>
+		<div class="col-md">
+			<label class="col-md control-label" for="clientDropdownSelect">Select Client</label>
+			<select id="clientDropdownSelect" title="...." name="clientId" class="form-control selectpicker"
+				data-live-search="true"></select>
 		</div>
 	</div>
 	<div class="row">
