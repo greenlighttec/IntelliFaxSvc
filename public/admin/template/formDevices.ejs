@@ -24,6 +24,15 @@
 	<div class="row pb-3">
 		<div class="col-md">
 			<div class="form-group">
+				<label class="control-label" for="deviceAuthName">Device Username</label>
+				<input id="deviceAuthName" name="deviceAuthName" type="text" placeholder="intellicompdemofax"
+					class="form-control input-md" required=""
+					style="background-image: none; background-repeat: initial; background-attachment: initial; background-size: initial; background-position: initial; cursor: auto;">
+				<small>Provide an authorization username for the device.</small>
+			</div>
+		</div>
+		<div class="col-md">
+			<div class="form-group">
 				<label class="col-md control-label" for="devicePassword">Device Password</label>
 				<input id="devicePassword" name="devicePassword" type="password" placeholder="Password1"
 					class="form-control input-md" required=""
@@ -37,7 +46,7 @@
 	<div class="row pb-3">
 		<div class="col-md">
 			<div class="form-group">
-				<label class="control-label" for="clientDropdownSelect">Select Client</label>
+				<label class="control-label" for="clientDropdownSelect">Client</label>
 				<select id="clientDropdownSelect" title="...." name="clientId" class="form-control selectpicker"
 					data-live-search="true"></select>
 				<small>Select the client the device will be listed under.</small>
