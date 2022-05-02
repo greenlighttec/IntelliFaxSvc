@@ -8,16 +8,16 @@
 				<label class="control-label" for="deviceName">Device Name</label>
 				<input id="deviceName" name="deviceName" type="text" placeholder="IntelliComp Test Demo Fax"
 					class="form-control input-md" required=""
-					style="background-image: none; background-repeat: initial; background-attachment: initial; background-size: initial; background-position: initial; cursor: auto;"
-					data-toggle="tooltip" data-placement="bottom" title="Provide a friendly name for the device.">
+					style="background-image: none; background-repeat: initial; background-attachment: initial; background-size: initial; background-position: initial; cursor: auto;">
+				<small>Provide a friendly name for the device.</small>
 			</div>
 		</div>
 		<div class="col-md">
 			<div class="form-group">
 				<label class="control-label" for="deviceMacaddr">MAC Address</label>
 				<input id="deviceMacaddr" name="deviceMacaddr" type="text" placeholder="00112233CCFF"
-					class="form-control input-md" data-toggle="tooltip" data-placement="bottom"
-					title="Provide the physical MAC Address of the gateway.">
+					class="form-control input-md">
+				<small>Provide the physical MAC Address of the gateway.</small>
 			</div>
 		</div>
 	</div>
@@ -27,9 +27,8 @@
 				<label class="col-md control-label" for="devicePassword">Device Password</label>
 				<input id="devicePassword" name="devicePassword" type="password" placeholder="Password1"
 					class="form-control input-md" required=""
-					style="background-image: none; background-repeat: initial; background-attachment: initial; background-size: initial; background-position: initial; cursor: auto;"
-					data-toggle="tooltip" data-placement="bottom"
-					title="Provide the authentication password for the device to communicate.">
+					style="background-image: none; background-repeat: initial; background-attachment: initial; background-size: initial; background-position: initial; cursor: auto;">
+				<small>Provide the authentication password for the device to communicate.</small>
 			</div>
 		</div>
 	</div>
@@ -51,8 +50,8 @@
 				<div class="input-group">
 					<div class="input-group-text">#</div>
 					<input id="deviceLine1" name="deviceLine1" class="form-control" placeholder="+14105554932"
-						type="text" data-toggle="tooltip" data-placement="bottom"
-						title="Provide the fax number for line 1.">
+						type="text">
+					<small>Provide the fax number for line 1.</small>
 				</div>
 			</div>
 		</div>
@@ -62,8 +61,8 @@
 				<div class="input-group">
 					<div class="input-group-text">#</div>
 					<input id="deviceLine2" name="deviceLine2" class="form-control" placeholder="+14105554933"
-						type="text" data-toggle="tooltip" data-placement="bottom"
-						title="Provide the fax number for line 2.">
+						type="text">
+					<small>Provide the fax number for line 2.</small>
 				</div>
 			</div>
 		</div>
@@ -73,7 +72,11 @@
 	<div class="row text-center">
 		<div class="col-md">
 			<button id="button1id" name="button2id" class="btn btn-danger ripple-surface">Delete Device</button>
+		</div>
+		<div class="col-md">
 			<button id="button2id" name="button3id" class="btn btn-warning ripple-surface">Reset Form</button>
+		</div>
+		<div class="col-md">
 			<button id="button3id" name="button1id" class="btn btn-primary ripple-surface">Create Device</button>
 		</div>
 	</div>
