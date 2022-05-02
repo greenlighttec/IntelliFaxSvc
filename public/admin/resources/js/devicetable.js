@@ -84,9 +84,9 @@ function populateForm(event) {
 		}).prop('selected', true);
 		$('#clientDropdownSelect').selectpicker('refresh');
 
-		document.getElementById('customerAccountButton').innerText = "Update Account"
+		document.getElementById('customerAccountButton').innerText = "Update Device"
 		document.getElementById('resetForm').disabled = false;
-		document.getElementById('deleteAccount').disabled = false;
+		document.getElementById('deleteDevice').disabled = false;
 
 	}
 	
@@ -153,9 +153,9 @@ function resetFormData() {
 	formControls.forEach( (control) => {control.value = null})
    $("#clientDropdownSelect").val('default').selectpicker("refresh");
 	
-	document.getElementById('customerAccountButton').innerText = "Create Account"
+	document.getElementById('customerAccountButton').innerText = "Create Device"
 	document.getElementById('resetForm').disabled = true;
-	document.getElementById('deleteAccount').disabled = true;
+	document.getElementById('deleteDevice').disabled = true;
 
 
 }
