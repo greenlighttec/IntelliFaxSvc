@@ -61,8 +61,8 @@ const gridOptions = {
 
 function populateForm(event) {
 	if (event.node.selected) {
-		console.log(event)
 		let selectedData = event.data
+		console.log(selectedData)
 		var clientName = selectedData.Client.clientname
 		var deviceId = selectedData.id
 		var deviceLine1 =  selectedData.line1
@@ -71,13 +71,13 @@ function populateForm(event) {
 		var deviceName = selectedData.name
 		var deviceUsername = selectedData.username
 		document.getElementById('deviceId').value = deviceId
-		document.getElementById('deviceName').innerText = deviceName
-		document.getElementById('deviceAuthName').innerText = deviceUsername
-		document.getElementById('deviceLine1').innerText = deviceLine1
-		document.getElementById('deviceLine2').innerText = deviceLine2
-		document.getElementById('deviceMacaddr').innerText = deviceMacaddr
+		document.getElementById('deviceName').value = deviceName
+		document.getElementById('deviceAuthName').value = deviceUsername
+		document.getElementById('deviceLine1').value = deviceLine1
+		document.getElementById('deviceLine2').value = deviceLine2
+		document.getElementById('deviceMacaddr').value = deviceMacaddr
 		//document.getElementById('accountName').className = "form-control active"
-		//document.getElementById('accountName').value = clientName
+		document.getElementById('devicePassword').required = false
 
 		jQuery("#clientDropdownSelect option").filter(function(){
 		    return $.trim($(this).text()) == clientName
