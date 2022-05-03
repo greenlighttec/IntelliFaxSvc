@@ -11,6 +11,11 @@ let tableHeaders = [
       sortable: true,
 	  filter: true
 	},
+	{ headerName: 'Device Mac Address',
+	  field: 'Device.macaddr',
+      sortable: true,
+	  filter: true
+	},
 	{ headerName: 'Phone Number',
 	  field: "phonenumber",
 	  sortable: true,
