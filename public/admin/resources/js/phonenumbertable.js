@@ -6,6 +6,11 @@ let tableHeaders = [
 	  sortable: true,
 	  filter: true
 	},
+	{ headerName: 'Device Name',
+	  field: 'Device.name',
+      sortable: true,
+	  filter: true
+	},
 	{ headerName: 'Phone Number',
 	  field: "phonenumber",
 	  sortable: true,
@@ -34,12 +39,10 @@ const gridOptions = {
 };
 
 const refreshTableData = () => {
-	fetch('/admin/api/getallphonenumbers') // Fetch for all scores. The response is an array of objects that is sorted in decreasing order
+	fetch('/admin/api/getallphonenumbers')
 	.then(res => res.json())
 	.then(accounts => {
-		gridOptions.api.setRowData(accounts) // Clears scoreboard div if it has any children nodes, creates & appends the table
-		//console.log(accounts)
-		// Iterates through all the objects in the scores array and appends each one to the table body
+		gridOptions.api.setRowData(accounts)
 	})
 }
 
