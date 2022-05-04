@@ -12,6 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
      Devices.belongsTo(models.Clients, {foriegnKey: 'clientid', onDelete: 'CASCADE'})
+     Devices.hasMany(models.PhoneNumbers, {foriegnKey: 'deviceid', onDelete: 'CASCADE'})
+     Devices.hasMany(models.FaxLogs, {foriegnKey: 'deviceid', onDelete: 'CASCADE'})
     }
   }
   Devices.init({

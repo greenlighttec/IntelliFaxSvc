@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
      PhoneNumbers.belongsTo(models.Clients, {foriegnKey: 'clientid', onDelete: 'CASCADE'})
-     PhoneNumbers.belongsTo(models.Devices, {foriegnKey: 'deviceid'})
+     PhoneNumbers.belongsTo(models.Devices, {foriegnKey: 'deviceid', onDelete: 'CASCADE'})
 
     }
   }

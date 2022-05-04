@@ -11,9 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-     Clients.hasMany(models.Users, {foriegnKey: 'clientid'})
-     Clients.hasMany(models.Devices, {foriegnKey: 'clientid'})
-     Clients.hasMany(models.PhoneNumbers, {foriegnKey: 'clientid'})
+     Clients.hasMany(models.Users, {foriegnKey: 'clientid', onDelete: 'CASCADE})
+     Clients.hasMany(models.Devices, {foriegnKey: 'clientid', onDelete: 'CASCADE})
+     Clients.hasMany(models.PhoneNumbers, {foriegnKey: 'clientid', onDelete: 'CASCADE})
+     Clients.hasMany(models.FaxLogs, {foriegnKey: 'clientid', onDelete: 'CASCADE'})
     }
   }
   Clients.init({
