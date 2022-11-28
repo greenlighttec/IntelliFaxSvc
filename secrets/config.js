@@ -1,4 +1,4 @@
-{
+module.exports =  {
 "telnyx": {
 	"telnyxapikey": process.env.TELNYX_API_SECRETKEY,
 	"telnyxpublickey": process.env.TELNYX_API_PUBLICKEY,
