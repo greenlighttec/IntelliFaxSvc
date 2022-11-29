@@ -7,5 +7,6 @@ RUN apt install -y python3 make g++ pkg-config libtiff5 libtiff-dev \
     && npm install
 COPY --chown=node:node . .
 EXPOSE 8340
+CMD [ "node", "init.js" ]
 CMD [ "node", "index.js" ]
 
