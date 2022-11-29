@@ -11,6 +11,7 @@
     "mysql2": "^2.3.3",
     "pdftoimage": "^1.0.0",
     "sequelize": "^6.18.0",
+    "request": "^2.88.2",
     "tiff-multipage": "^0.2.0"
   }
 }
