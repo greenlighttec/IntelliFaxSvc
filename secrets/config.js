@@ -35,7 +35,7 @@ module.exports =  {
 },
  "internals": {
         "baseHostname": process.env.FAXAPP_DOMAIN, //Change this to the public hostname of this application
-        "basePath": "/home/node/faxapp", //Set this to the root path where this application is sitting
+        "basePath": "/home/node/faxapp/", //Set this to the root path where this application is sitting
         "faxAtaServerUrl": process.env.FAXBACK_FAXATAURL, //Set this to the faxAtaServerUrl provided by FaxBack
         "telnyxSendFaxUrl": process.env.TELNYX_API_URL //Set this to the Telnyx API
         }
