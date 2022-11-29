@@ -1,10 +1,11 @@
-FROM node:current-alpine3.15
-RUN mkdir -p /home/node/faxapp/node_modules && chown -R node:node /home/node/faxapp
-WORKDIR /home/node/
+FROM node
+ENV WORKDIR /home/node/faxapp/
+RUN mkdir -p $WORKDIR && chown -R node:node $WORKDIR
+WORKDIR $WORKDIR
 COPY package*.json ./
-RUN apk add --no-cache --virtual .gyp python3 make g++ pkgconfig tiff tiff-tools tiff-dev \
-    && npm install \
-    && apk del .gyp
+RUN apt install -y python3 make g++ pkg-config libtiff5 libtiff-dev \
+    && npm install
 COPY --chown=node:node . .
 EXPOSE 8340
 CMD [ "node", "index.js" ]
+
