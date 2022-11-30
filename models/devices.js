@@ -21,7 +21,6 @@ module.exports = (sequelize, DataTypes) => {
 	 allowNull: false,
 	 primaryKey: true,
 	 autoIncrement: true},
-    clientid: DataTypes.INTEGER,
     name: DataTypes.STRING,
     macaddr: DataTypes.STRING,
     line1: DataTypes.STRING,
