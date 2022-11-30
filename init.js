@@ -1,7 +1,7 @@
 var models = require(process.env.WORKDIR + 'models')
 models.sequelize.sync()
 const Clients = require(process.env.WORKDIR + 'models').Clients;
-const users = require(process.env.WORKDIR + 'faxapp/lib/admin/UserAccoutns.js');
+const users = require(process.env.WORKDIR + 'lib/admin/UserAccounts.js');
 
 Clients.create({id: 1,clientname: 'Default Site'})
 
