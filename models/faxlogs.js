@@ -18,8 +18,6 @@ module.exports = (sequelize, DataTypes) => {
   FaxLogs.init({
     telnyxfaxid: DataTypes.STRING,
     atafaxid: DataTypes.STRING,
-    clientid: DataTypes.INTEGER,
-    deviceid: DataTypes.INTEGER,
     numberfrom: DataTypes.STRING,
     numberto: DataTypes.STRING,
     direction: DataTypes.STRING,
