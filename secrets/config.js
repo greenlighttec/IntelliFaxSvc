@@ -11,8 +11,7 @@ module.exports =  {
     "username":  process.env.DEV_DB_USER,
     "password":  process.env.DEV_DB_PASS,
     "database":  process.env.DEV_DB_DATABASE,
-    "dialect":  process.env.DEV_DB_DIALECT,
-    "logging":  process.env.DEV_DB_LOGGING
+    "dialect":  process.env.DEV_DB_DIALECT
   },
   "test": {
     "host":  process.env.TEST_DB_HOST,
@@ -20,8 +19,7 @@ module.exports =  {
     "username":  process.env.TEST_DB_USER,
     "password":  process.env.TEST_DB_PASS,
     "database":  process.env.TEST_DB_DATABASE,
-    "dialect": process.env.TEST_DB_DIALECT,
-    "logging": process.env.TEST_DB_LOGGING
+    "dialect": process.env.TEST_DB_DIALECT
   },
   "production": {
     "host": process.env.PROD_DB_HOST,
@@ -29,8 +27,7 @@ module.exports =  {
     "username": process.env.PROD_DB_USER,
     "password": process.env.PROD_DB_PASS,
     "database": process.env.PROD_DB_DATABASE,
-    "dialect": process.env.PROD_DB_DIALECT,
-    "logging": process.env.PROD_DB_LOGGING
+    "dialect": process.env.PROD_DB_DIALECT
   }
 },
  "internals": {
