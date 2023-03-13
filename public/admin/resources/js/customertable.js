@@ -45,9 +45,10 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 
 pageTableDiv.addEventListener("click", function (event) {
-	if (event.path[0].className == 'ag-cell-value ag-cell ag-cell-not-inline-editing ag-cell-normal-height ag-cell-focus') {
-		var clientId = event.path[1].childNodes[0].innerText;
-		var clientName = event.path[1].childNodes[1].innerText;
+	if (event.srcElement.className == 'ag-cell-value ag-cell ag-cell-not-inline-editing ag-cell-normal-height ag-cell-focus') {
+		var agRow = event.__agComponent.eRow
+		var clientId = agRow.children[0].innerText;
+		var clientName = agRow.children[1].innerText;
 		document.getElementById('accountId').value = clientId
 		document.getElementById('accountIdLabel').innerText = clientId
 		document.getElementById('accountName').className = "form-control active"
