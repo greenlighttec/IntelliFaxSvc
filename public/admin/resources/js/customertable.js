@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 pageTableDiv.addEventListener("click", function (event) {
 	if (event.srcElement.className == 'ag-cell-value ag-cell ag-cell-not-inline-editing ag-cell-normal-height ag-cell-focus') {
-		var agRow = event.__agComponent.eRow
+		var agRow = event.srcElement.__agComponent.eRow
 		var clientId = agRow.children[0].innerText;
 		var clientName = agRow.children[1].innerText;
 		document.getElementById('accountId').value = clientId
