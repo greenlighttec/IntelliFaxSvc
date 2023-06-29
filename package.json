@@ -3,7 +3,7 @@
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
     "cookie-parser": "^1.4.6",
-    "ejs": "^3.1.7",
+    "ejs": "^3.1.9",
     "express": "^4.17.3",
     "express-basic-auth": "^1.2.1",
     "js": "^0.1.0",
