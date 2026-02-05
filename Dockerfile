@@ -1,4 +1,4 @@
-FROM node
+FROM node:25.6.0-bookworm
 ENV WORKDIR /home/node/faxapp/
 RUN mkdir -p $WORKDIR && chown -R node:node $WORKDIR
 WORKDIR $WORKDIR
